@@ -6,7 +6,10 @@
 package gingerland;
 
 import environment.Environment;
+import grid.Grid;
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
@@ -15,8 +18,14 @@ import java.awt.event.MouseEvent;
  * @author sofialuzgalbanpatterson
  */
 class CandyLand extends Environment {
-
+    
+    Grid grid; 
+    
+    
+ 
     public CandyLand() {
+        grid = new Grid(25, 20, 20, 20, new Point(10, 50), Color.BLACK);
+        
     }
 
     @Override
@@ -38,10 +47,17 @@ class CandyLand extends Environment {
 
     @Override
     public void environmentMouseClicked(MouseEvent e) {
+        System.out.println("mouse click at " + e.getPoint());
+        System.out.println("mouse clicked in cell " + grid.getCellLocationFromSystemCoordinate(e.getPoint()));
+        
     }
 
     @Override
     public void paintEnvironment(Graphics graphics) {
+        if (grid != null){
+            grid.paintComponent(graphics);
+        } 
+        
     }
     
-}
+} 
