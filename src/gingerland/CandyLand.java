@@ -39,10 +39,6 @@ class CandyLand extends Environment {
 
     @Override
     public void keyPressedHandler(KeyEvent e) {
-    }
-
-    @Override
-    public void keyReleasedHandler(KeyEvent e) {
 //        System.out.println("Key Event" + e.getKeyChar());
 //        System.out.println("Key Event" + e.getKeyCode());
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
@@ -58,9 +54,24 @@ class CandyLand extends Environment {
     }
 
     @Override
+    public void keyReleasedHandler(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_W){ 
+            System.out.println("Go Left!");
+        } else if (e.getKeyCode() == KeyEvent.VK_A) {
+            System.out.println("Go Right!");
+        } else if (e.getKeyCode() == KeyEvent.VK_S){
+            System.out.println("Go Up!");
+        } else if (e.getKeyCode() == KeyEvent.VK_D){
+            System.out.println("Go Down!");
+        }
+
+    }
+
+    @Override
     public void environmentMouseClicked(MouseEvent e) {
         System.out.println("mouse click at " + e.getPoint());
         System.out.println("mouse clicked in cell " + grid.getCellLocationFromSystemCoordinate(e.getPoint()));
+        
 
     }
 
