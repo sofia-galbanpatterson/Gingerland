@@ -18,23 +18,23 @@ import java.awt.event.MouseEvent;
  * @author sofialuzgalbanpatterson
  */
 class CandyLand extends Environment {
-    
-    Grid grid; 
-    
-    
- 
+
+    Grid grid;
+
     public CandyLand() {
         grid = new Grid(25, 20, 20, 20, new Point(10, 50), Color.BLACK);
-        
+
     }
 
     @Override
     public void initializeEnvironment() {
-    
+
     }
+    int counter;
 
     @Override
     public void timerTaskHandler() {
+//        System.out.println("Hey!" + ++counter);
     }
 
     @Override
@@ -43,21 +43,33 @@ class CandyLand extends Environment {
 
     @Override
     public void keyReleasedHandler(KeyEvent e) {
+//        System.out.println("Key Event" + e.getKeyChar());
+//        System.out.println("Key Event" + e.getKeyCode());
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            System.out.println("Go Left!");
+        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            System.out.println("Go Right!");
+        } else if (e.getKeyCode() == KeyEvent.VK_UP) {
+            System.out.println("Go Up!");
+        } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            System.out.println("Go Down!");
+        }
+
     }
 
     @Override
     public void environmentMouseClicked(MouseEvent e) {
         System.out.println("mouse click at " + e.getPoint());
         System.out.println("mouse clicked in cell " + grid.getCellLocationFromSystemCoordinate(e.getPoint()));
-        
+
     }
 
     @Override
     public void paintEnvironment(Graphics graphics) {
-        if (grid != null){
+        if (grid != null) {
             grid.paintComponent(graphics);
-        } 
-        
+        }
+
     }
-    
-} 
+
+}
