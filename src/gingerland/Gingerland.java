@@ -17,7 +17,9 @@ public class Gingerland {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        ApplicationStarter.run("Ginger Land", new CandyLand());
+        ApplicationStarter.run("Gingerland", new CandyLand());
     }
+    
+    
     
 }

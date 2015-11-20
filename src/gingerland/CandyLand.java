@@ -5,10 +5,13 @@
  */
 package gingerland;
 
+import apple.laf.JRSUIConstants;
 import environment.Environment;
 import grid.Grid;
+import images.ResourceTools;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -20,10 +23,21 @@ import java.awt.event.MouseEvent;
 class CandyLand extends Environment {
 
     Grid grid;
+    Image Farquaad;
+    Image Gingy;
+    Image GummyBear;
+    
+
+    {
+        grid = new Grid(25, 20, 20, 20, new Point(10, 50), Color.BLACK);
+    
+    }
 
     public CandyLand() {
-        grid = new Grid(25, 20, 20, 20, new Point(10, 50), Color.BLACK);
-
+        Farquaad = ResourceTools.loadImageFromResource("gingerland/Farquaad_S.png");
+        Gingy = ResourceTools.loadImageFromResource("gingerland/gingy.png");
+        GummyBear = ResourceTools.loadImageFromResource("gingerland/gummy bear.png"); 
+    
     }
 
     @Override
@@ -55,13 +69,13 @@ class CandyLand extends Environment {
 
     @Override
     public void keyReleasedHandler(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_W){ 
+        if (e.getKeyCode() == KeyEvent.VK_W) {
             System.out.println("Go Left!");
         } else if (e.getKeyCode() == KeyEvent.VK_A) {
             System.out.println("Go Right!");
-        } else if (e.getKeyCode() == KeyEvent.VK_S){
+        } else if (e.getKeyCode() == KeyEvent.VK_S) {
             System.out.println("Go Up!");
-        } else if (e.getKeyCode() == KeyEvent.VK_D){
+        } else if (e.getKeyCode() == KeyEvent.VK_D) {
             System.out.println("Go Down!");
         }
 
@@ -71,7 +85,6 @@ class CandyLand extends Environment {
     public void environmentMouseClicked(MouseEvent e) {
         System.out.println("mouse click at " + e.getPoint());
         System.out.println("mouse clicked in cell " + grid.getCellLocationFromSystemCoordinate(e.getPoint()));
-        
 
     }
 
@@ -79,6 +92,20 @@ class CandyLand extends Environment {
     public void paintEnvironment(Graphics graphics) {
         if (grid != null) {
             grid.paintComponent(graphics);
+            
+            if (Gingy != null) {
+                graphics.drawImage(Gingy, 400, 250, 100, 100, this);
+                
+        }
+            if (GummyBear != null) {
+                graphics.drawImage(GummyBear, 400, 400, 50, 50, this);
+            }
+            
+            if (Farquaad != null) {
+                graphics.drawImage(Farquaad, 300, 300, 100, 100, this);
+            }
+            
+            if 
         }
 
     }
