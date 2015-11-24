@@ -20,16 +20,18 @@ import java.awt.event.MouseEvent;
  *
  * @author sofialuzgalbanpatterson
  */
-class CandyLand extends Environment {
+class CandyLand extends Environment implements CellDataProviderIntf {
 
     Grid grid;
     Image Farquaad;
     Image Gingy;
     Image GummyBear;
-    
+    private Barrier myBarrier; 
 
     {
         grid = new Grid(25, 20, 20, 20, new Point(10, 50), Color.BLACK);
+        myBarrier = new Barrier(20, 40, Color.RED, this); 
+        
     
     }
 
@@ -37,6 +39,7 @@ class CandyLand extends Environment {
         Farquaad = ResourceTools.loadImageFromResource("gingerland/Farquaad_S.png");
         Gingy = ResourceTools.loadImageFromResource("gingerland/gingy.png");
         GummyBear = ResourceTools.loadImageFromResource("gingerland/gummy bear.png"); 
+        
     
     }
 
@@ -103,11 +106,41 @@ class CandyLand extends Environment {
             
             if (Farquaad != null) {
                 graphics.drawImage(Farquaad, 300, 300, 100, 100, this);
+               
             }
             
-            if 
+            if (myBarrier != null) {
+                graphics.fill3DRect(15, 10, 20, 30, true);
+                
+                
+            }
+            
+           
         }
 
     }
 
+    //<editor-fold defaultstate="collapsed" desc="CellDataProviderIntf">
+    @Override
+    public int getCellWidth() {
+        return grid.getCellWidth();
+    }
+    
+    @Override
+    public int getCellHeight() {
+        return grid.getCellHeight();
+    }
+    
+    @Override
+    public int getSystemCoordX(int x, int y) {
+        return grid.getCellSystemCoordinate(x, y).x;
+        
+    }
+    
+    @Override
+    public int getSystemCoordY(int x, int y) {
+        return grid.getCellSystemCoordinate(x , y).y;
+    }
+    
 }
+//</editor-fold>
