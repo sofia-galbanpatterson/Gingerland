@@ -15,30 +15,32 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.Toolkit; 
 
 /**
  *
  * @author sofialuzgalbanpatterson
  */
-class CandyLand extends Environment implements CellDataProviderIntf {
+class CandyLand extends Environment implements CellDataProviderIntf, MoveValidatorIntf {
 
     Grid grid;
     Image Farquaad;
     Image Gingy;
     Image GummyBear;
+    Image GingerbreadSprite; 
     private Barrier myBarrier; 
 
     {
         grid = new Grid(25, 20, 20, 20, new Point(10, 50), Color.BLACK);
         myBarrier = new Barrier(20, 40, Color.RED, this); 
         
-    
     }
 
     public CandyLand() {
         Farquaad = ResourceTools.loadImageFromResource("gingerland/Farquaad_S.png");
         Gingy = ResourceTools.loadImageFromResource("gingerland/gingy.png");
         GummyBear = ResourceTools.loadImageFromResource("gingerland/gummy bear.png"); 
+        GingerbreadSprite = Toolkit.getDefaultToolkit().createImage("http://s10.postimg.org/421pwag9h/ginggersprite2.gif"); 
         
     
     }
@@ -110,7 +112,7 @@ class CandyLand extends Environment implements CellDataProviderIntf {
             }
             
             if (myBarrier != null) {
-                graphics.fill3DRect(15, 10, 20, 30, true);
+                graphics.fill3DRect(15, 10, 20, 30, true); 
                 
                 
             }
@@ -141,6 +143,16 @@ class CandyLand extends Environment implements CellDataProviderIntf {
     public int getSystemCoordY(int x, int y) {
         return grid.getCellSystemCoordinate(x , y).y;
     }
+
+    //<editor-fold defaultstate="collapsed" desc="MoveValidatorIntf">
+    @Override
+    public Point validateMove(Point proposedLocation) {
+        
+        
+        
+       return proposedLocation; 
+    }
     
 }
+//</editor-fold>
 //</editor-fold>
