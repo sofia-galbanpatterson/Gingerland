@@ -15,10 +15,8 @@ import java.awt.Graphics;
 public class Barrier {
     
     public void draw(Graphics graphics){ 
-        graphics.setColor(Color.BLACK);
-        graphics.draw3DRect(cellData.getSystemCoordX(x, y), cellData.getSystemCoordY(x, y), cellData.getCellWidth(), cellData.getCellHeight(), true);
-        
-        
+        graphics.setColor(Color.PINK);
+        graphics.fill3DRect(cellData.getSystemCoordX(x, y), cellData.getSystemCoordY(x, y), cellData.getCellWidth(), cellData.getCellHeight(), true);
     }
     
     //<editor-fold defaultstate="collapsed" desc="Constructors">

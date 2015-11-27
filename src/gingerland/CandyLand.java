@@ -15,7 +15,8 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.awt.Toolkit; 
+import java.awt.Toolkit;
+import java.util.ArrayList;
 
 /**
  *
@@ -27,22 +28,24 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
     Image Farquaad;
     Image Gingy;
     Image GummyBear;
-    Image GingerbreadSprite; 
-    private Barrier myBarrier; 
+    Image GingerbreadSprite;
+    private ArrayList<Barrier> barriers;
 
     {
         grid = new Grid(25, 20, 20, 20, new Point(10, 50), Color.BLACK);
-        myBarrier = new Barrier(20, 40, Color.RED, this); 
-        
+        barriers = new ArrayList<>();
+        barriers.add(new Barrier(0, 0, Color.PINK, this));
+        barriers.add(new Barrier(1, 0, Color.PINK, this));
+        barriers.add(new Barrier(2, 0, Color.PINK, this));
+        barriers.add(new Barrier(3, 0, Color.PINK, this));
+        barriers.add(new Barrier(4, 0, Color.PINK, this));
+
     }
 
     public CandyLand() {
         Farquaad = ResourceTools.loadImageFromResource("gingerland/Farquaad_S.png");
         Gingy = ResourceTools.loadImageFromResource("gingerland/gingy.png");
-        GummyBear = ResourceTools.loadImageFromResource("gingerland/gummy bear.png"); 
-        GingerbreadSprite = Toolkit.getDefaultToolkit().createImage("http://s10.postimg.org/421pwag9h/ginggersprite2.gif"); 
-        
-    
+        GummyBear = ResourceTools.loadImageFromResource("gingerland/gummy bear.png");
     }
 
     @Override
@@ -97,29 +100,28 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
     public void paintEnvironment(Graphics graphics) {
         if (grid != null) {
             grid.paintComponent(graphics);
-            
-            if (Gingy != null) {
-                graphics.drawImage(Gingy, 400, 250, 100, 100, this);
-                
-        }
-            if (GummyBear != null) {
-                graphics.drawImage(GummyBear, 400, 400, 50, 50, this);
-            }
-            
-            if (Farquaad != null) {
-                graphics.drawImage(Farquaad, 300, 300, 100, 100, this);
-               
-            }
-            
-            if (myBarrier != null) {
-                graphics.fill3DRect(15, 10, 20, 30, true); 
-                
-                
-            }
-            
-           
         }
 
+        if (Gingy != null) {
+            graphics.drawImage(Gingy, 400, 250, 100, 100, this);
+
+        }
+        if (GummyBear != null) {
+            graphics.drawImage(GummyBear, 400, 400, 50, 50, this);
+        }
+
+        if (Farquaad != null) {
+            graphics.drawImage(Farquaad, 300, 300, 100, 100, this);
+
+        }
+
+        if (barriers != null) {
+            for (int i = 0; i < barriers.size(); i++) {
+                barriers.get(i).draw(graphics);
+            }
+            
+            
+        }
     }
 
     //<editor-fold defaultstate="collapsed" desc="CellDataProviderIntf">
@@ -127,32 +129,30 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
     public int getCellWidth() {
         return grid.getCellWidth();
     }
-    
+
     @Override
     public int getCellHeight() {
         return grid.getCellHeight();
     }
-    
+
     @Override
     public int getSystemCoordX(int x, int y) {
         return grid.getCellSystemCoordinate(x, y).x;
-        
+
     }
-    
+
     @Override
     public int getSystemCoordY(int x, int y) {
-        return grid.getCellSystemCoordinate(x , y).y;
+        return grid.getCellSystemCoordinate(x, y).y;
     }
 
     //<editor-fold defaultstate="collapsed" desc="MoveValidatorIntf">
     @Override
     public Point validateMove(Point proposedLocation) {
-        
-        
-        
-       return proposedLocation; 
+
+        return proposedLocation;
     }
-    
+
 }
 //</editor-fold>
 //</editor-fold>
