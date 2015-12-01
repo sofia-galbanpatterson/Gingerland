@@ -5,7 +5,7 @@
  */
 package gingerland;
 
-import apple.laf.JRSUIConstants;
+import environment.Direction;
 import environment.Environment;
 import grid.Grid;
 import images.ResourceTools;
@@ -15,7 +15,6 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.awt.Toolkit;
 import java.util.ArrayList;
 
 /**
@@ -30,6 +29,8 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
     Image GummyBear;
     Image GingerbreadSprite;
     private ArrayList<Barrier> barriers;
+    private GingerbreadMan gingy; 
+           
 
     {
         grid = new Grid(25, 20, 20, 20, new Point(10, 50), Color.BLACK);
@@ -43,9 +44,11 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
     }
 
     public CandyLand() {
-        Farquaad = ResourceTools.loadImageFromResource("gingerland/Farquaad_S.png");
-        Gingy = ResourceTools.loadImageFromResource("gingerland/gingy.png");
-        GummyBear = ResourceTools.loadImageFromResource("gingerland/gummy bear.png");
+//        Farquaad = ResourceTools.loadImageFromResource("gingerland/Farquaad_S.png");
+//        Gingy = ResourceTools.loadImageFromResource("gingerland/gingy.png");
+//        GummyBear = ResourceTools.loadImageFromResource("gingerland/gummy bear.png");
+//        GingerbreadSprite = ResourceTools.loadImageFromResource("gingerbread sprite"); 
+        gingy = new GingerbreadMan(3, 4, Direction.DOWN, this); 
     }
 
     @Override
@@ -56,7 +59,9 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
 
     @Override
     public void timerTaskHandler() {
-//        System.out.println("Hey!" + ++counter);
+        if (gingy != null) {
+            gingy.move();
+        }
     }
 
     @Override
@@ -65,12 +70,16 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
 //        System.out.println("Key Event" + e.getKeyCode());
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             System.out.println("Go Left!");
+            gingy.setDirection(Direction.LEFT);
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             System.out.println("Go Right!");
+            gingy.setDirection(Direction.RIGHT);
         } else if (e.getKeyCode() == KeyEvent.VK_UP) {
             System.out.println("Go Up!");
+            gingy.setDirection(Direction.UP);
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
             System.out.println("Go Down!");
+            gingy.setDirection(Direction.DOWN);
         }
 
     }
@@ -114,12 +123,19 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
             graphics.drawImage(Farquaad, 300, 300, 100, 100, this);
 
         }
+        
+        
+            
+        
 
         if (barriers != null) {
             for (int i = 0; i < barriers.size(); i++) {
                 barriers.get(i).draw(graphics);
-            }
-            
+            } 
+        }
+        
+        if (gingy != null) {
+            gingy.draw(graphics);
             
         }
     }
