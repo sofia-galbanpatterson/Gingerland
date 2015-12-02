@@ -29,8 +29,7 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
     Image GummyBear;
     Image GingerbreadSprite;
     private ArrayList<Barrier> barriers;
-    private GingerbreadMan gingy; 
-           
+    private GingerbreadMan gingy;
 
     {
         grid = new Grid(25, 20, 20, 20, new Point(10, 50), Color.BLACK);
@@ -48,19 +47,31 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
 //        Gingy = ResourceTools.loadImageFromResource("gingerland/gingy.png");
 //        GummyBear = ResourceTools.loadImageFromResource("gingerland/gummy bear.png");
 //        GingerbreadSprite = ResourceTools.loadImageFromResource("gingerbread sprite"); 
-        gingy = new GingerbreadMan(3, 4, Direction.DOWN, this); 
+        gingy = new GingerbreadMan(3, 4, Direction.DOWN, this);
     }
 
     @Override
     public void initializeEnvironment() {
 
     }
-    int counter;
+    private int counter;
+    private int limit = 2;
+    final int LIMIT_SLOW = 5; 
+    final int LIMIT_MEDIUM = 3; 
+    final int LIMIT_FAST = 1; 
+    final int LIMIT_CRAZY = 0; 
+    
 
+    //need a counter and a limit
     @Override
     public void timerTaskHandler() {
         if (gingy != null) {
-            gingy.move();
+            if (counter < limit) {
+                counter++;
+            } else {
+                counter = 0;
+                gingy.move(); 
+            }
         }
     }
 
@@ -69,17 +80,21 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
 //        System.out.println("Key Event" + e.getKeyChar());
 //        System.out.println("Key Event" + e.getKeyCode());
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            System.out.println("Go Left!");
             gingy.setDirection(Direction.LEFT);
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            System.out.println("Go Right!");
             gingy.setDirection(Direction.RIGHT);
         } else if (e.getKeyCode() == KeyEvent.VK_UP) {
-            System.out.println("Go Up!");
             gingy.setDirection(Direction.UP);
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            System.out.println("Go Down!");
             gingy.setDirection(Direction.DOWN);
+        } else if (e.getKeyCode() == KeyEvent.VK_1) {
+            this.limit = LIMIT_SLOW;
+        } else if (e.getKeyCode() == KeyEvent.VK_2) {
+            this.limit = LIMIT_MEDIUM;
+        } else if (e.getKeyCode() == KeyEvent.VK_3) {
+            this.limit = LIMIT_FAST;
+        } else if (e.getKeyCode() == KeyEvent.VK_4) {
+            this.limit = LIMIT_CRAZY;
         }
 
     }
@@ -123,20 +138,16 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
             graphics.drawImage(Farquaad, 300, 300, 100, 100, this);
 
         }
-        
-        
-            
-        
 
         if (barriers != null) {
             for (int i = 0; i < barriers.size(); i++) {
                 barriers.get(i).draw(graphics);
-            } 
+            }
         }
-        
+
         if (gingy != null) {
             gingy.draw(graphics);
-            
+
         }
     }
 

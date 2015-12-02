@@ -11,6 +11,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
+
 /**
  *
  * @author sofialuzgalbanpatterson
@@ -27,7 +28,11 @@ public class GingerbreadMan {
         }if (direction == Direction.UP) {
             y--;
         }
-    }
+        
+      
+    }       
+    
+
     
     
     public void draw(Graphics graphics){
