@@ -42,6 +42,8 @@ public class GingerbreadMan {
                            cellData.getCellWidth(), 
                            cellData.getCellHeight(), 
                            null);
+        
+        
     }
     
 //    public GingerbreadMan (int x, int y, Direction direction, CellDataProviderIntf cellData){
