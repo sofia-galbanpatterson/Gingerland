@@ -15,6 +15,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 /**
@@ -36,9 +37,12 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
     private GingerbreadMan gingy;
 
     {
-        //<editor-fold defaultstate="collapsed" desc="Barriers">
+        //<editor-fold defaultstate="collapsed" desc="Barriers and Grid">
         grid = new Grid(25, 17, 32, 32, new Point(10, 50), Color.MAGENTA);
-        this.setBackground(ResourceTools.loadImageFromResource("grass_background.png")); 
+        
+        BufferedImage temp = (BufferedImage) ResourceTools.loadImageFromResource("gingerland/grass_background.png");
+        
+        this.setBackground(temp.getScaledInstance(1600, 900, Image.SCALE_SMOOTH)); 
 
         barriers = new ArrayList<>();
         barriers.add(new Barrier(2, 2, Color.PINK, this));
@@ -67,12 +71,12 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
     public CandyLand() {
 //        GingerbreadSprite = ResourceTools.loadImageFromResource("gingerbread sprite"); 
         gingy = new GingerbreadMan(3, 4, Direction.DOWN, this);
-        gingerbreadsprite1 = ResourceTools.loadImageFromResource("gingerbread_front_still.png");
-        gingerbreadsprite2 = ResourceTools.loadImageFromResource("gingerbread_front_walk1.png");
-        gingerbreadsprite3 = ResourceTools.loadImageFromResource("gingerbread_front_walk2.png");
-        gingerbreadsprite4 = ResourceTools.loadImageFromResource("gingerbread_right_still.png");
-        gingerbreadsprite5 = ResourceTools.loadImageFromResource("gingerbread_right_walk.png");
-        gingerbreadsprite6 = ResourceTools.loadImageFromResource("gingerbread_right_walk2.png");
+        gingerbreadsprite1 = ResourceTools.loadImageFromResource("gingerland/gingerbread_front_still.png");
+        gingerbreadsprite2 = ResourceTools.loadImageFromResource("gingerland/gingerbread_front_walk1.png");
+        gingerbreadsprite3 = ResourceTools.loadImageFromResource("gingerland/gingerbread_front_walk2.png");
+        gingerbreadsprite4 = ResourceTools.loadImageFromResource("gingerland/gingerbread_right_still.png");
+        gingerbreadsprite5 = ResourceTools.loadImageFromResource("gingerland/gingerbread_right_walk.png");
+        gingerbreadsprite6 = ResourceTools.loadImageFromResource("gingerland/gingerbread_right_walk2.png");
 
     }
 
@@ -161,17 +165,39 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
             gingy.draw(graphics);
 
         }
-        
+
         if (gingerbreadsprite1 != null) {
-            graphics.drawImage(gingerbreadsprite1, 400, 250, 100, 100, this);
-           
+            graphics.drawImage(gingerbreadsprite1, 400, 250, 25, 25, this); 
+        }
+        
+        if (gingerbreadsprite2 !=null) { 
+            graphics.drawImage(gingerbreadsprite2, 350, 260, 25, 25, this); 
+        }
+        
+        if (gingerbreadsprite3 !=null) { 
+            graphics.drawImage(gingerbreadsprite3, 650, 270, 25, 25, this); 
+        }
+        
+        if (gingerbreadsprite4 !=null) { 
+            graphics.drawImage(gingerbreadsprite4, 550, 280, 25, 25, this); 
+        }
+        
+        if (gingerbreadsprite5 !=null) { 
+            graphics.drawImage(gingerbreadsprite5, 750, 290, 25, 25, this); 
+        }
+        
+        if (gingerbreadsprite6 !=null) { 
+            graphics.drawImage(gingerbreadsprite6, 850, 300, 25, 25, this); 
         }
         
         
         
         
+        
+        
     }
-
+        
+        
     //<editor-fold defaultstate="collapsed" desc="CellDataProviderIntf">
     @Override
     public int getCellWidth() {
@@ -193,14 +219,18 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
     public int getSystemCoordY(int x, int y) {
         return grid.getCellSystemCoordinate(x, y).y;
     }
+    
+    
 
     //<editor-fold defaultstate="collapsed" desc="MoveValidatorIntf">
     @Override
     public Point validateMove(Point proposedLocation) {
-
         return proposedLocation;
     }
 
 }
+        
+    
+        
 //</editor-fold>
 //</editor-fold>
