@@ -61,13 +61,16 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
         barriers.add(new Barrier(3, 12, Color.PINK, this));
         barriers.add(new Barrier(4, 12, Color.PINK, this));
         barriers.add(new Barrier(12, 12, Color.PINK, this));
-        barriers.add(new Barrier(12, 13, Color.PINK, this));
-        barriers.add(new Barrier(12, 14, Color.PINK, this));
-        barriers.add(new Barrier(12, 15, Color.PINK, this));
+        barriers.add(new Barrier(13, 12, Color.PINK, this));
+        barriers.add(new Barrier(14, 12, Color.PINK, this));
+        barriers.add(new Barrier(15, 12, Color.PINK, this));
+        barriers.add(new Barrier(16, 12, Color.PINK, this));
+        barriers.add(new Barrier(17, 12, Color.PINK, this));
+        
 
 //</editor-fold> 
     }
-
+    
     public CandyLand() {
 //        GingerbreadSprite = ResourceTools.loadImageFromResource("gingerbread sprite"); 
         gingy = new GingerbreadMan(3, 4, Direction.DOWN, this);
@@ -77,6 +80,7 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
         gingerbreadsprite4 = ResourceTools.loadImageFromResource("gingerland/gingerbread_right_still.png");
         gingerbreadsprite5 = ResourceTools.loadImageFromResource("gingerland/gingerbread_right_walk.png");
         gingerbreadsprite6 = ResourceTools.loadImageFromResource("gingerland/gingerbread_right_walk2.png");
+        
 
     }
 
@@ -189,11 +193,6 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
         if (gingerbreadsprite6 !=null) { 
             graphics.drawImage(gingerbreadsprite6, 850, 300, 25, 25, this); 
         }
-        
-        
-        
-        
-        
         
     }
         
