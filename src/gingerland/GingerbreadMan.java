@@ -54,22 +54,23 @@ public class GingerbreadMan {
         //image
         BufferedImage temp = (BufferedImage) ResourceTools.loadImageFromResource("gingerland/gingerbread_sprite_sheet.jpg");
         this.image = temp.getSubimage(12, 9, 26, 36);
-
-        ImageManager im = new ImageManager();
-        im.addImage(GINGERBREAD_FRONT_STILL, ResourceTools.loadImageFromResource("gingerbread_front_still.png"));
-        im.addImage(GINGERBREAD_FRONT_WALK1, ResourceTools.loadImageFromResource("gingerbread_front_walk1.png"));
-        im.addImage(GINGERBREAD_FRONT_WALK2, ResourceTools.loadImageFromResource("gingerbread_front_walk2.png"));
-        im.addImage(GINGERBREAD_LEFT_STILL, ResourceTools.loadImageFromResource("gingerbread_left_still.png"));
-        im.addImage(GINGERBREAD_LEFT_WALK1, ResourceTools.loadImageFromResource("gingerbread_left_walk1.png"));
-        im.addImage(GINGERBREAD_LEFT_WALK2, ResourceTools.loadImageFromResource("gingerbread_left_walk2.png"));
-        im.addImage(GINGERBREAD_RIGHT_STILL, ResourceTools.loadImageFromResource("gingerbread_right_still.png"));
-        im.addImage(GINGERBREAD_RIGHT_WALK, ResourceTools.loadImageFromResource("gingerbread_right_walk.png"));
-        im.addImage(GINGERBREAD_RIGHT_WALK2, ResourceTools.loadImageFromResource("gingerbread_right_walk2.png"));
-
-        frontImages = new ArrayList<>();
-        frontImages.add animator = new Animator(im, frontImages, 200);
+//
+//        ImageManager im = new ImageManager();
+//        im.addImage(GINGERBREAD_FRONT_STILL, ResourceTools.loadImageFromResource("gingerbread_front_still.png"));
+//        im.addImage(GINGERBREAD_FRONT_WALK1, ResourceTools.loadImageFromResource("gingerbread_front_walk1.png"));
+//        im.addImage(GINGERBREAD_FRONT_WALK2, ResourceTools.loadImageFromResource("gingerbread_front_walk2.png"));
+//        im.addImage(GINGERBREAD_LEFT_STILL, ResourceTools.loadImageFromResource("gingerbread_left_still.png"));
+//        im.addImage(GINGERBREAD_LEFT_WALK1, ResourceTools.loadImageFromResource("gingerbread_left_walk1.png"));
+//        im.addImage(GINGERBREAD_LEFT_WALK2, ResourceTools.loadImageFromResource("gingerbread_left_walk2.png"));
+//        im.addImage(GINGERBREAD_RIGHT_STILL, ResourceTools.loadImageFromResource("gingerbread_right_still.png"));
+//        im.addImage(GINGERBREAD_RIGHT_WALK, ResourceTools.loadImageFromResource("gingerbread_right_walk.png"));
+//        im.addImage(GINGERBREAD_RIGHT_WALK2, ResourceTools.loadImageFromResource("gingerbread_right_walk2.png"));
+//
+//        frontImages = new ArrayList<>();
+//        frontImages.add animator = new Animator(im, frontImages, 200);
 
     }
+    
 
     Animator animator;
 

@@ -5,6 +5,7 @@
  */
 package gingerland;
 
+import audio.AudioPlayer;
 import environment.Direction;
 import environment.Environment;
 import grid.Grid;
@@ -32,6 +33,9 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
     Image gingerbreadsprite4;
     Image gingerbreadsprite5;
     Image gingerbreadsprite6;
+    Image gingerbreadsprite7; 
+    Image gingerbreadsprite8; 
+    Image gingerbreadsprite9; 
 
     private ArrayList<Barrier> barriers;
     private GingerbreadMan gingy;
@@ -80,6 +84,11 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
         gingerbreadsprite4 = ResourceTools.loadImageFromResource("gingerland/gingerbread_right_still.png");
         gingerbreadsprite5 = ResourceTools.loadImageFromResource("gingerland/gingerbread_right_walk.png");
         gingerbreadsprite6 = ResourceTools.loadImageFromResource("gingerland/gingerbread_right_walk2.png");
+        gingerbreadsprite7 = ResourceTools.loadImageFromResource("gingerland/gingerbread_left_still.png");
+        gingerbreadsprite8 = ResourceTools.loadImageFromResource("gingerland/gingerbread_left_walk1.png");
+        gingerbreadsprite9 = ResourceTools.loadImageFromResource("gingerland/gingerbread_left_walk2.png");
+
+
         
 
     }
@@ -128,7 +137,9 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
             this.limit = LIMIT_FAST;
         } else if (e.getKeyCode() == KeyEvent.VK_4) {
             this.limit = LIMIT_CRAZY;
-        }
+        } else if (e.getKeyCode()== KeyEvent.VK_SPACE) { 
+            AudioPlayer.play("/gingerland/collections_sound.wav"); 
+        } 
 
     }
 
