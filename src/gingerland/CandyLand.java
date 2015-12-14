@@ -38,6 +38,7 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
     Image gingerbreadsprite9; 
 
     private ArrayList<Barrier> barriers;
+    private ArrayList <Item> items; 
     private GingerbreadMan gingy;
 
     {
@@ -70,6 +71,12 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
         barriers.add(new Barrier(15, 12, Color.PINK, this));
         barriers.add(new Barrier(16, 12, Color.PINK, this));
         barriers.add(new Barrier(17, 12, Color.PINK, this));
+        
+        
+    items = new ArrayList <>(); 
+    items.add(new Item(5, 5, "POWER_UP", 
+            ResourceTools.loadImageFromResource("gingerland/gummybear.png"), this)); 
+            
         
 
 //</editor-fold> 
@@ -137,11 +144,16 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
             this.limit = LIMIT_FAST;
         } else if (e.getKeyCode() == KeyEvent.VK_4) {
             this.limit = LIMIT_CRAZY;
+            
+            
         } else if (e.getKeyCode()== KeyEvent.VK_SPACE) { 
             AudioPlayer.play("/gingerland/collections_sound.wav"); 
-        } 
+        } else if (e.getKeyCode() == KeyEvent.VK_F) { 
+            AudioPlayer.play("/gingerland/jumpsound.wav");
+        }
 
     }
+    
 
     @Override
     public void keyReleasedHandler(KeyEvent e) {
@@ -203,6 +215,12 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
         
         if (gingerbreadsprite6 !=null) { 
             graphics.drawImage(gingerbreadsprite6, 850, 300, 25, 25, this); 
+        }
+        
+        if (items != null) { 
+            for (int i = 0; i < items.size(); i++) { 
+                items.get(i).draw(graphics);
+            }
         }
         
     }
