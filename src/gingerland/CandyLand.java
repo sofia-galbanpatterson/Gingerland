@@ -33,57 +33,83 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
     Image gingerbreadsprite4;
     Image gingerbreadsprite5;
     Image gingerbreadsprite6;
-    Image gingerbreadsprite7; 
-    Image gingerbreadsprite8; 
-    Image gingerbreadsprite9; 
+    Image gingerbreadsprite7;
+    Image gingerbreadsprite8;
+    Image gingerbreadsprite9;
 
     private ArrayList<Barrier> barriers;
-    private ArrayList <Item> items; 
+    private ArrayList<Item> items;
     private GingerbreadMan gingy;
 
     {
         //<editor-fold defaultstate="collapsed" desc="Barriers and Grid">
         grid = new Grid(25, 17, 32, 32, new Point(10, 50), Color.MAGENTA);
-        
+
         BufferedImage temp = (BufferedImage) ResourceTools.loadImageFromResource("gingerland/grass_background.png");
-        
-        this.setBackground(temp.getScaledInstance(1600, 900, Image.SCALE_SMOOTH)); 
+
+        this.setBackground(temp.getScaledInstance(1600, 900, Image.SCALE_SMOOTH));
 
         barriers = new ArrayList<>();
         barriers.add(new Barrier(2, 2, Color.PINK, this));
         barriers.add(new Barrier(3, 2, Color.PINK, this));
         barriers.add(new Barrier(4, 2, Color.PINK, this));
         barriers.add(new Barrier(5, 2, Color.PINK, this));
+        barriers.add(new Barrier(9, 2, Color.PINK, this));
+        barriers.add(new Barrier(10, 2, Color.PINK, this));
+        barriers.add(new Barrier(20, 3, Color.PINK, this));
+        barriers.add(new Barrier(21, 3, Color.PINK, this));
+        barriers.add(new Barrier(22, 3, Color.PINK, this));
+        barriers.add(new Barrier(23, 3, Color.PINK, this));
+        barriers.add(new Barrier(20, 10, Color.PINK, this));
+        barriers.add(new Barrier(21, 10, Color.PINK, this));
+        barriers.add(new Barrier(22, 10, Color.PINK, this));
+        barriers.add(new Barrier(23, 10, Color.PINK, this));
+
+        barriers.add(new Barrier(20, 20, Color.PINK, this));
+        barriers.add(new Barrier(13, 12, Color.PINK, this));
+        barriers.add(new Barrier(8, 12, Color.PINK, this));
+        barriers.add(new Barrier(9, 12, Color.PINK, this));
         barriers.add(new Barrier(6, 2, Color.PINK, this));
         barriers.add(new Barrier(7, 5, Color.PINK, this));
         barriers.add(new Barrier(8, 5, Color.PINK, this));
         barriers.add(new Barrier(9, 5, Color.PINK, this));
         barriers.add(new Barrier(10, 5, Color.PINK, this));
+        barriers.add(new Barrier(10, 5, Color.PINK, this));
         barriers.add(new Barrier(11, 8, Color.PINK, this));
         barriers.add(new Barrier(12, 8, Color.PINK, this));
-        barriers.add(new Barrier(1, 12, Color.PINK, this));
+        barriers.add(new Barrier(1, 12, Color.PINK, this)); 
         barriers.add(new Barrier(2, 12, Color.PINK, this));
         barriers.add(new Barrier(3, 12, Color.PINK, this));
         barriers.add(new Barrier(4, 12, Color.PINK, this));
-        barriers.add(new Barrier(12, 12, Color.PINK, this));
+        barriers.add(new Barrier(18, 12, Color.PINK, this));
         barriers.add(new Barrier(13, 12, Color.PINK, this));
         barriers.add(new Barrier(14, 12, Color.PINK, this));
         barriers.add(new Barrier(15, 12, Color.PINK, this));
         barriers.add(new Barrier(16, 12, Color.PINK, this));
         barriers.add(new Barrier(17, 12, Color.PINK, this));
-        
-        
-    items = new ArrayList <>(); 
-    items.add(new Item(5, 5, "POWER_UP", 
-            ResourceTools.loadImageFromResource("gingerland/gummybear.png"), this)); 
-            
-        
+        barriers.add(new Barrier(5, 12, Color.PINK, this));
+        barriers.add(new Barrier(9, 12, Color.PINK, this));
+
+        items = new ArrayList<>();
+        items.add(new Item(5, 5, "POWER_UP",
+                ResourceTools.loadImageFromResource("gingerland/gummybear.png"), this));
+        items.add(new Item(8, 8, "POWER_UP",
+                ResourceTools.loadImageFromResource("gingerland/candycane.png"), this));
+        items.add(new Item(6, 6, "POWER_UP",
+                ResourceTools.loadImageFromResource("gingerland/gummybear.png"), this));
+        items.add(new Item(10, 10, "POWER_UP",
+                ResourceTools.loadImageFromResource("gingerland/gummybear.png"), this));
+        items.add(new Item(11, 12, "POWER_UP",
+                ResourceTools.loadImageFromResource("gingerland/gummybear.png"), this));
+        items.add(new Item(20, 12, "POWER_UP",
+                ResourceTools.loadImageFromResource("gingerland/candycane.png"), this));
+        items.add(new Item(20, 5, "POWER_UP",
+                ResourceTools.loadImageFromResource("gingerland/candycane.png"), this));
 
 //</editor-fold> 
     }
-    
+
     public CandyLand() {
-//        GingerbreadSprite = ResourceTools.loadImageFromResource("gingerbread sprite"); 
         gingy = new GingerbreadMan(3, 4, Direction.DOWN, this);
         gingerbreadsprite1 = ResourceTools.loadImageFromResource("gingerland/gingerbread_front_still.png");
         gingerbreadsprite2 = ResourceTools.loadImageFromResource("gingerland/gingerbread_front_walk1.png");
@@ -94,9 +120,6 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
         gingerbreadsprite7 = ResourceTools.loadImageFromResource("gingerland/gingerbread_left_still.png");
         gingerbreadsprite8 = ResourceTools.loadImageFromResource("gingerland/gingerbread_left_walk1.png");
         gingerbreadsprite9 = ResourceTools.loadImageFromResource("gingerland/gingerbread_left_walk2.png");
-
-
-        
 
     }
 
@@ -144,16 +167,14 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
             this.limit = LIMIT_FAST;
         } else if (e.getKeyCode() == KeyEvent.VK_4) {
             this.limit = LIMIT_CRAZY;
-            
-            
-        } else if (e.getKeyCode()== KeyEvent.VK_SPACE) { 
-            AudioPlayer.play("/gingerland/collections_sound.wav"); 
-        } else if (e.getKeyCode() == KeyEvent.VK_F) { 
+
+        } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            AudioPlayer.play("/gingerland/collections_sound.wav");
+        } else if (e.getKeyCode() == KeyEvent.VK_F) {
             AudioPlayer.play("/gingerland/jumpsound.wav");
         }
 
     }
-    
 
     @Override
     public void keyReleasedHandler(KeyEvent e) {
@@ -166,14 +187,12 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
         } else if (e.getKeyCode() == KeyEvent.VK_D) {
             System.out.println("Go Down!");
         }
-
     }
 
     @Override
     public void environmentMouseClicked(MouseEvent e) {
         System.out.println("mouse click at " + e.getPoint());
         System.out.println("mouse clicked in cell " + grid.getCellLocationFromSystemCoordinate(e.getPoint()));
-
     }
 
     @Override
@@ -190,42 +209,21 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
 
         if (gingy != null) {
             gingy.draw(graphics);
-
         }
 
-        if (gingerbreadsprite1 != null) {
-            graphics.drawImage(gingerbreadsprite1, 400, 250, 25, 25, this); 
-        }
-        
-        if (gingerbreadsprite2 !=null) { 
-            graphics.drawImage(gingerbreadsprite2, 350, 260, 25, 25, this); 
-        }
-        
-        if (gingerbreadsprite3 !=null) { 
-            graphics.drawImage(gingerbreadsprite3, 650, 270, 25, 25, this); 
-        }
-        
-        if (gingerbreadsprite4 !=null) { 
-            graphics.drawImage(gingerbreadsprite4, 550, 280, 25, 25, this); 
-        }
-        
-        if (gingerbreadsprite5 !=null) { 
-            graphics.drawImage(gingerbreadsprite5, 750, 290, 25, 25, this); 
-        }
-        
-        if (gingerbreadsprite6 !=null) { 
-            graphics.drawImage(gingerbreadsprite6, 850, 300, 25, 25, this); 
-        }
-        
-        if (items != null) { 
-            for (int i = 0; i < items.size(); i++) { 
+        if (items != null) {
+            for (int i = 0; i < items.size(); i++) {
                 items.get(i).draw(graphics);
+
+            }
+
+            if (gingy != null) {
+                gingy.draw(graphics);
             }
         }
-        
+
     }
-        
-        
+
     //<editor-fold defaultstate="collapsed" desc="CellDataProviderIntf">
     @Override
     public int getCellWidth() {
@@ -247,8 +245,6 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
     public int getSystemCoordY(int x, int y) {
         return grid.getCellSystemCoordinate(x, y).y;
     }
-    
-    
 
     //<editor-fold defaultstate="collapsed" desc="MoveValidatorIntf">
     @Override
@@ -257,8 +253,6 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
     }
 
 }
-        
-    
-        
+
 //</editor-fold>
 //</editor-fold>
