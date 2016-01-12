@@ -31,7 +31,7 @@ public class GingerbreadMan {
         }
         if (direction == Direction.UP) {
             y--;
-        } 
+        }
     }
 
     public void draw(Graphics graphics) {
@@ -63,8 +63,20 @@ public class GingerbreadMan {
         im.addImage(GINGERBREAD_RIGHT_STILL, ResourceTools.loadImageFromResource("gingerland/gingerbread_right_still.png"));
         im.addImage(GINGERBREAD_RIGHT_WALK, ResourceTools.loadImageFromResource("gingerland/gingerbread_right_walk.png"));
         im.addImage(GINGERBREAD_RIGHT_WALK2, ResourceTools.loadImageFromResource("gingerland/gingerbread_right_walk2.png"));
-        
-        
+
+        frontImages.add(GINGERBREAD_FRONT_STILL);
+        frontImages.add(GINGERBREAD_FRONT_WALK1);
+        frontImages.add(GINGERBREAD_FRONT_WALK2);
+
+        leftImages.add(GINGERBREAD_LEFT_STILL);
+        leftImages.add(GINGERBREAD_LEFT_WALK1);
+        leftImages.add(GINGERBREAD_LEFT_WALK2);
+
+        rightImages.add(GINGERBREAD_RIGHT_STILL);
+        rightImages.add(GINGERBREAD_RIGHT_WALK);
+        rightImages.add(GINGERBREAD_RIGHT_WALK2);
+
+        animator = new Animator(im, frontImages, 100);
     }
 
     Animator animator;
@@ -83,9 +95,6 @@ public class GingerbreadMan {
     private static final String GINGERBREAD_RIGHT_WALK = "GINGERBREAD_RIGHT_WALK";
     private static final String GINGERBREAD_RIGHT_WALK2 = "GINGERBREAD_RIGHT_WALK2";
     private static ArrayList<String> rightImages;
-    
-    
-    
 
 //<editor-fold defaultstate="collapsed" desc="Properties">
     private int x;
@@ -144,7 +153,7 @@ public class GingerbreadMan {
             animator.setImageNames(leftImages);
         } else if (direction == Direction.UP) {
             animator.setImageNames(frontImages);
-        }else if (direction == Direction.RIGHT) {
+        } else if (direction == Direction.RIGHT) {
             animator.setImageNames(rightImages);
         }
     }
