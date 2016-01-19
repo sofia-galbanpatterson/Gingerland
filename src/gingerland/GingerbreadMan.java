@@ -49,6 +49,8 @@ public class GingerbreadMan {
         this.y = y;
         this.direction = direction;
         this.cellData = cellData;
+        
+        
         //image
         BufferedImage temp = (BufferedImage) ResourceTools.loadImageFromResource("gingerland/gingerbread_sprite_sheet.jpg");
         this.image = temp.getSubimage(12, 9, 26, 36);
@@ -64,19 +66,22 @@ public class GingerbreadMan {
         im.addImage(GINGERBREAD_RIGHT_WALK, ResourceTools.loadImageFromResource("gingerland/gingerbread_right_walk.png"));
         im.addImage(GINGERBREAD_RIGHT_WALK2, ResourceTools.loadImageFromResource("gingerland/gingerbread_right_walk2.png"));
 
+        frontImages = new ArrayList<>();
         frontImages.add(GINGERBREAD_FRONT_STILL);
         frontImages.add(GINGERBREAD_FRONT_WALK1);
         frontImages.add(GINGERBREAD_FRONT_WALK2);
 
-        leftImages.add(GINGERBREAD_LEFT_STILL);
+        leftImages = new ArrayList<>(); 
+        leftImages.add(GINGERBREAD_LEFT_STILL); 
         leftImages.add(GINGERBREAD_LEFT_WALK1);
         leftImages.add(GINGERBREAD_LEFT_WALK2);
-
+        
+        rightImages = new ArrayList<>();
         rightImages.add(GINGERBREAD_RIGHT_STILL);
         rightImages.add(GINGERBREAD_RIGHT_WALK);
-        rightImages.add(GINGERBREAD_RIGHT_WALK2);
+        rightImages.add(GINGERBREAD_RIGHT_WALK2); 
 
-        animator = new Animator(im, frontImages, 100);
+        animator = new Animator(im, frontImages, 1000);
     }
 
     Animator animator;

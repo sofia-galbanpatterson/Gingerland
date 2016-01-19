@@ -6,6 +6,7 @@
 package gingerland;
 
 import audio.AudioPlayer;
+import audio.Track;
 import environment.Direction;
 import environment.Environment;
 import grid.Grid;
@@ -37,9 +38,10 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
     Image gingerbreadsprite8;
     Image gingerbreadsprite9;
 
-    private ArrayList<Barrier> barriers;
-    private ArrayList<Item> items;
-    private GingerbreadMan gingy;
+    private final ArrayList<Barrier> barriers;
+    private final ArrayList<Item> items;
+    private final GingerbreadMan gingy;
+    private String trackNameGameTimer; 
 
     {
         //<editor-fold defaultstate="collapsed" desc="Barriers and Grid">
@@ -49,6 +51,7 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
 
         this.setBackground(temp.getScaledInstance(1600, 900, Image.SCALE_SMOOTH));
 
+        //<editor-fold defaultstate="collapsed" desc="Barriers">
         barriers = new ArrayList<>();
         barriers.add(new Barrier(2, 2, Color.PINK, this));
         barriers.add(new Barrier(3, 2, Color.PINK, this));
@@ -64,7 +67,7 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
         barriers.add(new Barrier(21, 10, Color.PINK, this));
         barriers.add(new Barrier(22, 10, Color.PINK, this));
         barriers.add(new Barrier(23, 10, Color.PINK, this));
-
+        
         barriers.add(new Barrier(20, 20, Color.PINK, this));
         barriers.add(new Barrier(13, 12, Color.PINK, this));
         barriers.add(new Barrier(8, 12, Color.PINK, this));
@@ -77,7 +80,7 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
         barriers.add(new Barrier(10, 5, Color.PINK, this));
         barriers.add(new Barrier(11, 8, Color.PINK, this));
         barriers.add(new Barrier(12, 8, Color.PINK, this));
-        barriers.add(new Barrier(1, 12, Color.PINK, this)); 
+        barriers.add(new Barrier(1, 12, Color.PINK, this));
         barriers.add(new Barrier(2, 12, Color.PINK, this));
         barriers.add(new Barrier(3, 12, Color.PINK, this));
         barriers.add(new Barrier(4, 12, Color.PINK, this));
@@ -89,6 +92,7 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
         barriers.add(new Barrier(17, 12, Color.PINK, this));
         barriers.add(new Barrier(5, 12, Color.PINK, this));
         barriers.add(new Barrier(9, 12, Color.PINK, this));
+//</editor-fold>
 
         items = new ArrayList<>();
         items.add(new Item(5, 5, "POWER_UP",
@@ -120,11 +124,12 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
         gingerbreadsprite7 = ResourceTools.loadImageFromResource("gingerland/gingerbread_left_still.png");
         gingerbreadsprite8 = ResourceTools.loadImageFromResource("gingerland/gingerbread_left_walk1.png");
         gingerbreadsprite9 = ResourceTools.loadImageFromResource("gingerland/gingerbread_left_walk2.png");
-
     }
 
     @Override
     public void initializeEnvironment() {
+        
+        ArrayList<Track> tracks = new ArrayList<>(); 
 
     }
     private int counter;
