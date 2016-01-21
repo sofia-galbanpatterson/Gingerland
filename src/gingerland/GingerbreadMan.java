@@ -81,7 +81,7 @@ public class GingerbreadMan {
         rightImages.add(GINGERBREAD_RIGHT_WALK);
         rightImages.add(GINGERBREAD_RIGHT_WALK2); 
 
-        animator = new Animator(im, frontImages, 1000);
+        animator = new Animator(im, frontImages, 100);
     }
 
     Animator animator;

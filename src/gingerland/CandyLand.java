@@ -12,6 +12,7 @@ import environment.Environment;
 import grid.Grid;
 import images.ResourceTools;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
@@ -42,6 +43,7 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
     private final ArrayList<Item> items;
     private final GingerbreadMan gingy;
     private String trackNameGameTimer; 
+    private int score; 
 
     {
         //<editor-fold defaultstate="collapsed" desc="Barriers and Grid">
@@ -92,6 +94,8 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
         barriers.add(new Barrier(17, 12, Color.PINK, this));
         barriers.add(new Barrier(5, 12, Color.PINK, this));
         barriers.add(new Barrier(9, 12, Color.PINK, this));
+        
+      
 //</editor-fold>
 
         items = new ArrayList<>();
@@ -105,8 +109,10 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
                 ResourceTools.loadImageFromResource("gingerland/gummybear.png"), this));
         items.add(new Item(11, 12, "POWER_UP",
                 ResourceTools.loadImageFromResource("gingerland/gummybear.png"), this));
-        items.add(new Item(20, 12, "POWER_UP",
-                ResourceTools.loadImageFromResource("gingerland/candycane.png"), this));
+        
+        items.add(new Item(20, 12, Item.ITEM_TYPE_CANDYCANE,
+                ResourceTools.loadImageFromResource("gingerland/candycane.png"), this)); 
+        
         items.add(new Item(20, 5, "POWER_UP",
                 ResourceTools.loadImageFromResource("gingerland/candycane.png"), this));
 
@@ -226,6 +232,10 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
                 gingy.draw(graphics);
             }
         }
+        graphics.setColor(Color.WHITE); 
+        graphics.setFont(new Font ("Calibri", Font.BOLD, 35));
+        graphics.drawString("Score: " + score, 10, 20);
+        
 
     }
 

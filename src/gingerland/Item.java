@@ -5,6 +5,7 @@
  */
 package gingerland;
 
+import images.ResourceTools;
 import java.awt.Graphics;
 import java.awt.Image;
 
@@ -20,6 +21,8 @@ public class Item {
                 getCellData().getSystemCoordY(getX(), getY()), 
                 getCellData().getCellWidth(),
                 getCellData().getCellHeight(), null); 
+        
+        
     }
     
     public Item (int x, int y, String type, Image image, CellDataProviderIntf cellData){
@@ -28,19 +31,31 @@ public class Item {
         this.y = y; 
         this.type = type; 
         this.image = image; 
-        this.cellData = cellData; 
+        this.cellData = cellData;
         
-    }
+        if (type.equals(Item.ITEM_TYPE_CANDYCANE)) {
+          image = ResourceTools.loadImageFromResource("gingerland/candycane.png"); 
+        }
+        
+    } 
+    
        private int x, y;
+       private boolean alive;
        private String type; 
        private Image image; 
        private final CellDataProviderIntf cellData; 
+       private MoveValidatorIntf moveValidator; 
+       
        
 
     /**
      * @return the x
      */
        //<editor-fold defaultstate="collapsed" desc="Properties">
+       public static final String ITEM_TYPE_CANDYCANE = "CANDYCANE"; 
+       public static final String ITEM_TYPE_GUMMYBEAR = "GUMMYBEAR"; 
+       
+       
        public int getX() {
            return x;
        }
