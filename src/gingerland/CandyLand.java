@@ -154,6 +154,7 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
             } else {
                 counter = 0;
                 gingy.move();
+                score ++; 
             }
         }
     }
@@ -234,7 +235,7 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
         }
         graphics.setColor(Color.WHITE); 
         graphics.setFont(new Font ("Calibri", Font.BOLD, 35));
-        graphics.drawString("Score: " + score, 10, 20);
+        graphics.drawString("Score: " + score, 10, 20); 
         
 
     }
@@ -264,10 +265,30 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
     //<editor-fold defaultstate="collapsed" desc="MoveValidatorIntf">
     @Override
     public Point validateMove(Point proposedLocation) {
-        return proposedLocation;
+  
+        
+        if (proposedLocation.x < 0) {
+            proposedLocation.x = grid.getColumns() - 1; 
+        } else if (proposedLocation.x > grid.getColumns() - 1 ) {
+            proposedLocation.x = 0;
+        } else if (proposedLocation.y < 0) {
+            proposedLocation.y = grid.getRows() - 1;
+        } else if (proposedLocation.y > grid.getRows() - 1) { 
+            proposedLocation.y = 0; 
+        }
+        return null;
+       
+        
+        
     }
-
+    
 }
 
+
+        
+    
+
 //</editor-fold>
 //</editor-fold>
+
+        
