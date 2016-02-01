@@ -54,6 +54,7 @@ public class GingerbreadMan {
         //image
         BufferedImage temp = (BufferedImage) ResourceTools.loadImageFromResource("gingerland/gingerbread_sprite_sheet.jpg");
         this.image = temp.getSubimage(12, 9, 26, 36);
+       
 
         ImageManager im = new ImageManager();
         im.addImage(GINGERBREAD_FRONT_STILL, ResourceTools.loadImageFromResource("gingerland/gingerbread_front_still.png"));

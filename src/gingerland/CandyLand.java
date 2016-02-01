@@ -38,12 +38,15 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
     Image gingerbreadsprite7;
     Image gingerbreadsprite8;
     Image gingerbreadsprite9;
+    
 
     private final ArrayList<Barrier> barriers;
     private final ArrayList<Item> items;
     private final GingerbreadMan gingy;
     private String trackNameGameTimer; 
     private int score; 
+    Image farquaad_left;
+    Image farquaad_right; 
 
     {
         //<editor-fold defaultstate="collapsed" desc="Barriers and Grid">
@@ -109,13 +112,13 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
                 ResourceTools.loadImageFromResource("gingerland/gummybear.png"), this));
         items.add(new Item(11, 12, "POWER_UP",
                 ResourceTools.loadImageFromResource("gingerland/gummybear.png"), this));
-        
         items.add(new Item(20, 12, Item.ITEM_TYPE_CANDYCANE,
                 ResourceTools.loadImageFromResource("gingerland/candycane.png"), this)); 
-        
         items.add(new Item(20, 5, "POWER_UP",
                 ResourceTools.loadImageFromResource("gingerland/candycane.png"), this));
-
+        items.add(new Item(6, 20, "POWER_UP",
+                ResourceTools.loadImageFromResource("gingerland/candycane.png"), this)); 
+        
 //</editor-fold> 
     }
 
@@ -185,7 +188,6 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
         } else if (e.getKeyCode() == KeyEvent.VK_F) {
             AudioPlayer.play("/gingerland/jumpsound.wav");
         }
-
     }
 
     @Override
@@ -232,7 +234,15 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
             if (gingy != null) {
                 gingy.draw(graphics);
             }
-        }
+            
+            if (farquaad_left !=null) { 
+                graphics.drawImage(farquaad_left, 6, 6, this); 
+                
+            }
+                    
+            
+          
+                   }
         graphics.setColor(Color.WHITE); 
         graphics.setFont(new Font ("Calibri", Font.BOLD, 35));
         graphics.drawString("Score: " + score, 10, 20); 
