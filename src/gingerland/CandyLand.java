@@ -113,10 +113,10 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
                 ResourceTools.loadImageFromResource("gingerland/candycane.png"), this));
         items.add(new Item(20, 5, "POWER_UP",
                 ResourceTools.loadImageFromResource("gingerland/candycane.png"), this));
-        items.add(new Item(6, 20, "POWER_UP",
+        items.add(new Item(6, 8, "POWER_UP",
                 ResourceTools.loadImageFromResource("gingerland/candycane.png"), this));
 
-//</editor-fold> 
+//</editor-fold>     
     }
 
     public CandyLand() {
@@ -131,6 +131,8 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
         gingerbreadsprite8 = ResourceTools.loadImageFromResource("gingerland/gingerbread_left_walk1.png");
         gingerbreadsprite9 = ResourceTools.loadImageFromResource("gingerland/gingerbread_left_walk2.png");
         lord_farquaad_left = ResourceTools.loadImageFromResource("gingerland/lord_farquaad_left.png");
+        
+        
     }
 
     @Override
@@ -239,8 +241,10 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
             }
 
             if (lord_farquaad_right != null) {
-                graphics.drawImage(lord_farquaad_right, 10, 10, this);
+                graphics.drawImage(lord_farquaad_right, 6, 8, this);
             }
+            
+           
 
         }
         graphics.setColor(Color.WHITE);
@@ -281,15 +285,13 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
             proposedLocation.x = 0;
         }
         if (proposedLocation.y > 0) {
-            proposedLocation.y = grid.getRows() - 1;
+            proposedLocation.y = grid.getColumns() - 1;
         } else if (proposedLocation.y < grid.getColumns() - 1) {
             proposedLocation.y = 0;
 
         }
         return proposedLocation; 
-
     } 
-
 }
 
 //    
