@@ -280,15 +280,15 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
         } else if (proposedLocation.x > grid.getColumns() - 1) {
             proposedLocation.x = 0;
         }
-        if (proposedLocation.y < 0) {
+        if (proposedLocation.y > 0) {
             proposedLocation.y = grid.getRows() - 1;
-        } else if (proposedLocation.y > grid.getColumns() - 1) {
+        } else if (proposedLocation.y < grid.getColumns() - 1) {
             proposedLocation.y = 0;
 
         }
-        return proposedLocation;
+        return proposedLocation; 
 
-    }
+    } 
 
 }
 
