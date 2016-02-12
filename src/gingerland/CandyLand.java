@@ -6,6 +6,9 @@
 package gingerland;
 
 import audio.AudioPlayer;
+import audio.Playlist;
+import audio.SoundManager;
+import audio.Source;
 import audio.Track;
 import environment.Direction;
 import environment.Environment;
@@ -46,6 +49,7 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
     private int score;
     Image lord_farquaad_left;
     Image lord_farquaad_right;
+    Image gingerbreadhouse; 
 
     {
         //<editor-fold defaultstate="collapsed" desc="Barriers and Grid">
@@ -132,14 +136,27 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
         gingerbreadsprite9 = ResourceTools.loadImageFromResource("gingerland/gingerbread_left_walk2.png");
         lord_farquaad_left = ResourceTools.loadImageFromResource("gingerland/lord_farquaad_left.png");
         
+        setUpSound(); 
+    }
+    
+    SoundManager soundmanager; 
+    public static final String SOUND_BACKGROUND = "SOUND_BACKGROUND"; 
+    
+   
+    private void setUpSound(){
+        //set up a list of tracks in a playlist 
+        ArrayList<Track> tracks = new ArrayList<>(); 
+        tracks.add(new Track(SOUND_BACKGROUND, Source.RESOURCE, "/gingerland/background_music.wav")); 
         
+     Playlist playlist = new Playlist(tracks);    
+        //pass the playlist to a sound manager
+        soundmanager = new SoundManager(playlist); 
     }
 
     @Override
     public void initializeEnvironment() {
 
         ArrayList<Track> tracks = new ArrayList<>();
-
     }
     private int counter;
     private int limit = 2;
@@ -187,6 +204,9 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
             AudioPlayer.play("/gingerland/collections_sound.wav");
         } else if (e.getKeyCode() == KeyEvent.VK_F) {
             AudioPlayer.play("/gingerland/jumpsound.wav");
+            
+        } else if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
+            soundmanager.play(SOUND_BACKGROUND);
         }
     }
 
@@ -228,7 +248,6 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
         if (items != null) {
             for (int i = 0; i < items.size(); i++) {
                 items.get(i).draw(graphics);
-
             }
 
             if (gingy != null) {
@@ -237,15 +256,15 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
 
             if (lord_farquaad_left != null) {
                 graphics.drawImage(lord_farquaad_left, 7, 7, this);
-
             }
 
             if (lord_farquaad_right != null) {
                 graphics.drawImage(lord_farquaad_right, 6, 8, this);
             }
             
-           
-
+            if (gingerbreadhouse !=null) { 
+                graphics.drawImage(gingerbreadhouse, 6 , 6, 8, 8, this); 
+            }
         }
         graphics.setColor(Color.WHITE);
         graphics.setFont(new Font("Calibri", Font.BOLD, 35));
@@ -267,7 +286,6 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
     @Override
     public int getSystemCoordX(int x, int y) {
         return grid.getCellSystemCoordinate(x, y).x;
-
     }
 
     @Override
@@ -288,7 +306,6 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
             proposedLocation.y = grid.getColumns() - 1;
         } else if (proposedLocation.y < grid.getColumns() - 1) {
             proposedLocation.y = 0;
-
         }
         return proposedLocation; 
     } 
