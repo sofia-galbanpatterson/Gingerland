@@ -263,7 +263,7 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
             }
 
             if (lord_farquaad_right != null) {
-                graphics.drawImage(lord_farquaad_right, 10, 25, this);
+                graphics.drawImage(lord_farquaad_right, 10, 25, 20, 20, this);
             }
 
             if (gingerbreadhouse != null) {
