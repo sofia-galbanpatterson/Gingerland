@@ -49,7 +49,7 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
     private int score;
     Image lord_farquaad_left;
     Image lord_farquaad_right;
-    Image gingerbreadhouse; 
+    Image gingerbreadhouse;
 
     {
         //<editor-fold defaultstate="collapsed" desc="Barriers and Grid">
@@ -135,22 +135,23 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
         gingerbreadsprite8 = ResourceTools.loadImageFromResource("gingerland/gingerbread_left_walk1.png");
         gingerbreadsprite9 = ResourceTools.loadImageFromResource("gingerland/gingerbread_left_walk2.png");
         lord_farquaad_left = ResourceTools.loadImageFromResource("gingerland/lord_farquaad_left.png");
-        
-        setUpSound(); 
+        lord_farquaad_right = ResourceTools.loadImageFromResource("gingerland/lord_farquaad_right.png");
+        gingerbreadhouse = ResourceTools.loadImageFromResource("gingerland/gingerbreadhouse.png"); 
+
+        setUpSound();
     }
-    
-    SoundManager soundmanager; 
-    public static final String SOUND_BACKGROUND = "SOUND_BACKGROUND"; 
-    
-   
-    private void setUpSound(){
+
+    SoundManager soundmanager;
+    public static final String SOUND_BACKGROUND = "SOUND_BACKGROUND";
+
+    private void setUpSound() {
         //set up a list of tracks in a playlist 
-        ArrayList<Track> tracks = new ArrayList<>(); 
-        tracks.add(new Track(SOUND_BACKGROUND, Source.RESOURCE, "/gingerland/background_music.wav")); 
-        
-     Playlist playlist = new Playlist(tracks);    
+        ArrayList<Track> tracks = new ArrayList<>();
+        tracks.add(new Track(SOUND_BACKGROUND, Source.RESOURCE, "/gingerland/background_music.wav"));
+
+        Playlist playlist = new Playlist(tracks);
         //pass the playlist to a sound manager
-        soundmanager = new SoundManager(playlist); 
+        soundmanager = new SoundManager(playlist);
     }
 
     @Override
@@ -204,10 +205,13 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
             AudioPlayer.play("/gingerland/collections_sound.wav");
         } else if (e.getKeyCode() == KeyEvent.VK_F) {
             AudioPlayer.play("/gingerland/jumpsound.wav");
-            
+
         } else if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
             soundmanager.play(SOUND_BACKGROUND);
+
+            soundmanager.play(SOUND_BACKGROUND, -1);
         }
+
     }
 
     @Override
@@ -259,11 +263,11 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
             }
 
             if (lord_farquaad_right != null) {
-                graphics.drawImage(lord_farquaad_right, 6, 8, this);
+                graphics.drawImage(lord_farquaad_right, 10, 25, this);
             }
-            
-            if (gingerbreadhouse !=null) { 
-                graphics.drawImage(gingerbreadhouse, 6 , 6, 8, 8, this); 
+
+            if (gingerbreadhouse != null) {
+                graphics.drawImage(gingerbreadhouse, 6, 10, 10, 10, this);
             }
         }
         graphics.setColor(Color.WHITE);
@@ -307,8 +311,8 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
         } else if (proposedLocation.y < grid.getColumns() - 1) {
             proposedLocation.y = 0;
         }
-        return proposedLocation; 
-    } 
+        return proposedLocation;
+    }
 }
 
 //    
