@@ -11,6 +11,7 @@ import images.ImageManager;
 import images.ResourceTools;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -25,13 +26,19 @@ public class GingerbreadMan {
             x--;
         } else if (direction == Direction.DOWN) {
             y++;
-        }
-        if (direction == Direction.RIGHT) {
+        } else if (direction == Direction.RIGHT) {
             x++;
-        }
-        if (direction == Direction.UP) {
+        } else if (direction == Direction.UP) {
             y--;
         }
+        
+        Point newPosition = new Point(x, y);
+        if (moveValidator != null) {
+            newPosition = moveValidator.validateMove(newPosition);
+        }
+        
+        x = newPosition.x;
+        y = newPosition.y;
     }
 
     public void draw(Graphics graphics) {
@@ -44,11 +51,13 @@ public class GingerbreadMan {
     }
 
 //    public GingerbreadMan (int x, int y, Direction direction, CellDataProviderIntf cellData){
-    public GingerbreadMan(int x, int y, Direction direction, CellDataProviderIntf cellData) {
+    public GingerbreadMan(int x, int y, Direction direction, 
+            CellDataProviderIntf cellData, MoveValidatorIntf moveValidator) {
         this.x = x;
         this.y = y;
         this.direction = direction;
         this.cellData = cellData;
+        this.moveValidator = moveValidator;
         
         
         //image
@@ -111,6 +120,7 @@ public class GingerbreadMan {
             gingerbreadsprite6, gingerbreadsprite7, gingerbreadsprite8, gingerbreadsprite9;
 
     private CellDataProviderIntf cellData;
+    private final MoveValidatorIntf moveValidator;
 
     /**
      * @return the x

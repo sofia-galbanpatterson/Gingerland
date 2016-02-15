@@ -124,7 +124,7 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
     }
 
     public CandyLand() {
-        gingy = new GingerbreadMan(3, 4, Direction.DOWN, this);
+        gingy = new GingerbreadMan(3, 4, Direction.DOWN, this, this);
         gingerbreadsprite1 = ResourceTools.loadImageFromResource("gingerland/gingerbread_front_still.png");
         gingerbreadsprite2 = ResourceTools.loadImageFromResource("gingerland/gingerbread_front_walk1.png");
         gingerbreadsprite3 = ResourceTools.loadImageFromResource("gingerland/gingerbread_front_walk2.png");
@@ -303,12 +303,12 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
 
         if (proposedLocation.x < 0) {
             proposedLocation.x = grid.getColumns() - 1;
-        } else if (proposedLocation.x > grid.getColumns() - 1) {
+        } else if (proposedLocation.x >= grid.getColumns()) {
             proposedLocation.x = 0;
         }
-        if (proposedLocation.y > 0) {
+        if (proposedLocation.y < 0) {
             proposedLocation.y = grid.getColumns() - 1;
-        } else if (proposedLocation.y < grid.getColumns() - 1) {
+        } else if (proposedLocation.y >= grid.getColumns()) {
             proposedLocation.y = 0;
         }
         return proposedLocation;
