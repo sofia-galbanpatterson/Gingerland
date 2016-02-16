@@ -35,6 +35,10 @@ public class Item {
         
         if (type.equals(Item.ITEM_TYPE_CANDYCANE)) {
           image = ResourceTools.loadImageFromResource("gingerland/candycane.png"); 
+          
+          
+          
+          
         }
         
     } 

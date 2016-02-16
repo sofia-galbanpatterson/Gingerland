@@ -53,7 +53,7 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
 
     {
         //<editor-fold defaultstate="collapsed" desc="Barriers and Grid">
-        grid = new Grid(25, 17, 32, 32, new Point(10, 50), Color.MAGENTA);
+        grid = new Grid(25, 17, 40, 40, new Point(10, 50), Color.MAGENTA);
 
         BufferedImage temp = (BufferedImage) ResourceTools.loadImageFromResource("gingerland/grass_background.png");
 
@@ -75,11 +75,12 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
         barriers.add(new Barrier(21, 10, Color.PINK, this));
         barriers.add(new Barrier(22, 10, Color.PINK, this));
         barriers.add(new Barrier(23, 10, Color.PINK, this));
-
         barriers.add(new Barrier(20, 20, Color.PINK, this));
         barriers.add(new Barrier(13, 12, Color.PINK, this));
         barriers.add(new Barrier(8, 12, Color.PINK, this));
         barriers.add(new Barrier(9, 12, Color.PINK, this));
+                barriers.add(new Barrier(10, 12, Color.PINK, this));
+
         barriers.add(new Barrier(6, 2, Color.PINK, this));
         barriers.add(new Barrier(7, 5, Color.PINK, this));
         barriers.add(new Barrier(8, 5, Color.PINK, this));
@@ -100,6 +101,7 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
         barriers.add(new Barrier(17, 12, Color.PINK, this));
         barriers.add(new Barrier(5, 12, Color.PINK, this));
         barriers.add(new Barrier(9, 12, Color.PINK, this));
+        barriers.add(new Barrier(9, 12, Color.PINK, this));
 
 //</editor-fold>
         items = new ArrayList<>();
@@ -119,6 +121,15 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
                 ResourceTools.loadImageFromResource("gingerland/candycane.png"), this));
         items.add(new Item(6, 8, "POWER_UP",
                 ResourceTools.loadImageFromResource("gingerland/candycane.png"), this));
+        
+    } 
+    
+    private int getRandom(int maximum) { 
+        return (int) (Math.random() * maximum); 
+    
+    
+    
+   
 
 //</editor-fold>     
     }
@@ -136,7 +147,7 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
         gingerbreadsprite9 = ResourceTools.loadImageFromResource("gingerland/gingerbread_left_walk2.png");
         lord_farquaad_left = ResourceTools.loadImageFromResource("gingerland/lord_farquaad_left.png");
         lord_farquaad_right = ResourceTools.loadImageFromResource("gingerland/lord_farquaad_right.png");
-        gingerbreadhouse = ResourceTools.loadImageFromResource("gingerland/gingerbreadhouse.png"); 
+        gingerbreadhouse = ResourceTools.loadImageFromResource("gingerland/gingerbreadhouse.png");
 
         setUpSound();
     }
@@ -176,6 +187,26 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
                 counter = 0;
                 gingy.move();
                 score++;
+            }
+        }
+    }
+    
+    private void checkIntersections() { 
+        if (items != null) {
+            for (Item item : items)  { 
+                item.setX(getRandom(grid.getColumns()));
+                item.setY(getRandom(grid.getColumns()));
+                
+                if (item.getType().equals(Item.ITEM_TYPE_CANDYCANE)) {
+                    score += 5; 
+                
+            } if (item.getType().equals(Item.ITEM_TYPE_GUMMYBEAR)) 
+                    score += 10; 
+            
+            
+                
+                    
+                    
             }
         }
     }
@@ -267,7 +298,7 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
             }
 
             if (gingerbreadhouse != null) {
-                graphics.drawImage(gingerbreadhouse, 6, 10, 10, 10, this);
+                graphics.drawImage(gingerbreadhouse, 900, 95, 150, 150, this);
             }
         }
         graphics.setColor(Color.WHITE);
