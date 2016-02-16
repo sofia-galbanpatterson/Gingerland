@@ -53,7 +53,7 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
 
     {
         //<editor-fold defaultstate="collapsed" desc="Barriers and Grid">
-        grid = new Grid(25, 17, 40, 40, new Point(10, 50), Color.MAGENTA);
+        grid = new Grid(25, 50, 40, 40, new Point(10, 50), new Color(2, 49, 178, 1));
 
         BufferedImage temp = (BufferedImage) ResourceTools.loadImageFromResource("gingerland/grass_background.png");
 
@@ -79,7 +79,7 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
         barriers.add(new Barrier(13, 12, Color.PINK, this));
         barriers.add(new Barrier(8, 12, Color.PINK, this));
         barriers.add(new Barrier(9, 12, Color.PINK, this));
-                barriers.add(new Barrier(10, 12, Color.PINK, this));
+        barriers.add(new Barrier(10, 12, Color.PINK, this));
 
         barriers.add(new Barrier(6, 2, Color.PINK, this));
         barriers.add(new Barrier(7, 5, Color.PINK, this));
@@ -102,34 +102,51 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
         barriers.add(new Barrier(5, 12, Color.PINK, this));
         barriers.add(new Barrier(9, 12, Color.PINK, this));
         barriers.add(new Barrier(9, 12, Color.PINK, this));
+        //</editor-fold>
+        
+      
+        
+    }
 
-//</editor-fold>
+    {
+
         items = new ArrayList<>();
-        items.add(new Item(5, 5, "POWER_UP",
+        items.add(new Item(getRandom(grid.getColumns()), grid.getColumns(), Item.ITEM_TYPE_GUMMYBEAR,
                 ResourceTools.loadImageFromResource("gingerland/gummybear.png"), this));
-        items.add(new Item(8, 8, "POWER_UP",
+        items.add(new Item(getRandom(grid.getColumns()), grid.getColumns(), Item.ITEM_TYPE_CANDYCANE,
                 ResourceTools.loadImageFromResource("gingerland/candycane.png"), this));
-        items.add(new Item(6, 6, "POWER_UP",
+        items.add(new Item(getRandom(grid.getColumns()), grid.getColumns(), Item.ITEM_TYPE_GUMMYBEAR,
                 ResourceTools.loadImageFromResource("gingerland/gummybear.png"), this));
-        items.add(new Item(10, 10, "POWER_UP",
+        items.add(new Item(getRandom(grid.getColumns()), grid.getColumns(), Item.ITEM_TYPE_GUMMYBEAR,
                 ResourceTools.loadImageFromResource("gingerland/gummybear.png"), this));
-        items.add(new Item(11, 12, "POWER_UP",
-                ResourceTools.loadImageFromResource("gingerland/gummybear.png"), this));
-        items.add(new Item(20, 12, Item.ITEM_TYPE_CANDYCANE,
+        items.add(new Item(getRandom(grid.getColumns()), grid.getColumns(), Item.ITEM_TYPE_CANDYCANE,
                 ResourceTools.loadImageFromResource("gingerland/candycane.png"), this));
-        items.add(new Item(20, 5, "POWER_UP",
+        items.add(new Item(getRandom(grid.getColumns()), grid.getColumns(), Item.ITEM_TYPE_CANDYCANE,
                 ResourceTools.loadImageFromResource("gingerland/candycane.png"), this));
-        items.add(new Item(6, 8, "POWER_UP",
+        items.add(new Item(getRandom(grid.getColumns()), grid.getColumns(), Item.ITEM_TYPE_CANDYCANE,
+                ResourceTools.loadImageFromResource("gingerland/candycane.png"), this));
+        items.add(new Item(getRandom(grid.getColumns()), grid.getColumns(), Item.ITEM_TYPE_GUMMYBEAR,
+                ResourceTools.loadImageFromResource("gingerland/gummybear.png"), this));
+        items.add(new Item(getRandom(grid.getColumns()), grid.getColumns(), Item.ITEM_TYPE_GUMMYBEAR,
+                ResourceTools.loadImageFromResource("gingerland/gummybear.png"), this));
+        items.add(new Item(getRandom(grid.getColumns()), grid.getColumns(), Item.ITEM_TYPE_CANDYCANE,
+                ResourceTools.loadImageFromResource("gingerland/candycane.png"), this));
+        items.add(new Item(getRandom(grid.getColumns()), grid.getColumns(), Item.ITEM_TYPE_CANDYCANE,
                 ResourceTools.loadImageFromResource("gingerland/candycane.png"), this));
         
     } 
-    
-    private int getRandom(int maximum) { 
-        return (int) (Math.random() * maximum); 
-    
-    
-    
-   
+        
+         
+        private int getRandom(int maximum)  { 
+         return (int) (Math.random() * maximum);   
+        
+         
+                 
+         
+
+        
+
+       
 
 //</editor-fold>     
     }
@@ -190,23 +207,21 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
             }
         }
     }
-    
-    private void checkIntersections() { 
+
+    private void checkIntersections() {
         if (items != null) {
-            for (Item item : items)  { 
+            for (Item item : items) {
                 item.setX(getRandom(grid.getColumns()));
                 item.setY(getRandom(grid.getColumns()));
-                
+
                 if (item.getType().equals(Item.ITEM_TYPE_CANDYCANE)) {
-                    score += 5; 
-                
-            } if (item.getType().equals(Item.ITEM_TYPE_GUMMYBEAR)) 
-                    score += 10; 
-            
-            
-                
-                    
-                    
+                    score += 5;
+
+                }
+                if (item.getType().equals(Item.ITEM_TYPE_GUMMYBEAR)) {
+                    score += 10;
+                }
+
             }
         }
     }
