@@ -6,6 +6,7 @@
 package gingerland;
 
 import environment.ApplicationStarter;
+import java.awt.Dimension;
 
 /**
  *
@@ -17,7 +18,8 @@ public class Gingerland {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        ApplicationStarter.run("Gingerland", new CandyLand());
+//        ApplicationStarter.run("Gingerland", new CandyLand());
+        ApplicationStarter.run(new String[0], "Gingerland", new Dimension(1200, 750), new CandyLand());
     }
     
     
