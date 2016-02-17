@@ -36,6 +36,10 @@ public class Item {
         if (type.equals(Item.ITEM_TYPE_CANDYCANE)) {
           image = ResourceTools.loadImageFromResource("gingerland/candycane.png"); 
           
+          if (type.equals(Item.ITEM_TYPE_GUMMYBEAR)) { 
+              image = ResourceTools.loadImageFromResource("gingerland/gummybear.png"); 
+          }
+          
           
           
           
