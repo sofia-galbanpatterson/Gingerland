@@ -59,7 +59,6 @@ public class GingerbreadMan {
         this.cellData = cellData;
         this.moveValidator = moveValidator;
         
-        
         //image
         BufferedImage temp = (BufferedImage) ResourceTools.loadImageFromResource("gingerland/gingerbread_sprite_sheet.jpg");
         this.image = temp.getSubimage(12, 9, 26, 36);
@@ -121,6 +120,13 @@ public class GingerbreadMan {
 
     private CellDataProviderIntf cellData;
     private final MoveValidatorIntf moveValidator;
+
+    /**
+     * @return the x
+     */
+    public Point getLocation() {
+        return new Point(x, y);
+    }
 
     /**
      * @return the x

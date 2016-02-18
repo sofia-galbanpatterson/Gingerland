@@ -31,24 +31,25 @@ import java.util.ArrayList;
 class CandyLand extends Environment implements CellDataProviderIntf, MoveValidatorIntf {
 
     Grid grid;
-    Image Gingerbreadsprite;
-    Image gingerbreadsprite1;
-    Image gingerbreadsprite2;
-    Image gingerbreadsprite3;
-    Image gingerbreadsprite4;
-    Image gingerbreadsprite5;
-    Image gingerbreadsprite6;
-    Image gingerbreadsprite7;
-    Image gingerbreadsprite8;
-    Image gingerbreadsprite9;
+//    Image Gingerbreadsprite;
+//    Image gingerbreadsprite1;
+//    Image gingerbreadsprite2;
+//    Image gingerbreadsprite3;
+//    Image gingerbreadsprite4;
+//    Image gingerbreadsprite5;
+//    Image gingerbreadsprite6;
+//    Image gingerbreadsprite7;
+//    Image gingerbreadsprite8;
+//    Image gingerbreadsprite9;
 
     private final ArrayList<Barrier> barriers;
     private final ArrayList<Item> items;
     private final GingerbreadMan gingy;
+    private final LordFarquaad farquaad;
     private String trackNameGameTimer;
     private int score;
-    Image lord_farquaad_left;
-    Image lord_farquaad_right;
+//    Image lord_farquaad_left;
+//    Image lord_farquaad_right;
     Image gingerbreadhouse;
 
     {
@@ -135,30 +136,32 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
 
     public CandyLand() {
         gingy = new GingerbreadMan(3, 4, Direction.DOWN, this, this);
-        gingerbreadsprite1 = ResourceTools.loadImageFromResource("gingerland/gingerbread_front_still.png");
-        gingerbreadsprite2 = ResourceTools.loadImageFromResource("gingerland/gingerbread_front_walk1.png");
-        gingerbreadsprite3 = ResourceTools.loadImageFromResource("gingerland/gingerbread_front_walk2.png");
-        gingerbreadsprite4 = ResourceTools.loadImageFromResource("gingerland/gingerbread_right_still.png");
-        gingerbreadsprite5 = ResourceTools.loadImageFromResource("gingerland/gingerbread_right_walk.png");
-        gingerbreadsprite6 = ResourceTools.loadImageFromResource("gingerland/gingerbread_right_walk2.png");
-        gingerbreadsprite7 = ResourceTools.loadImageFromResource("gingerland/gingerbread_left_still.png");
-        gingerbreadsprite8 = ResourceTools.loadImageFromResource("gingerland/gingerbread_left_walk1.png");
-        gingerbreadsprite9 = ResourceTools.loadImageFromResource("gingerland/gingerbread_left_walk2.png");
+        farquaad = new LordFarquaad(grid.getColumns() / 2, grid.getRows() / 2, Direction.LEFT, this);
 
-        lord_farquaad_left = ResourceTools.loadImageFromResource("gingerland/lord_farquaad_left.png");
-        lord_farquaad_right = ResourceTools.loadImageFromResource("gingerland/lord_farquaad_right.png");
-
+//        gingerbreadsprite1 = ResourceTools.loadImageFromResource("gingerland/gingerbread_front_still.png");
+//        gingerbreadsprite2 = ResourceTools.loadImageFromResource("gingerland/gingerbread_front_walk1.png");
+//        gingerbreadsprite3 = ResourceTools.loadImageFromResource("gingerland/gingerbread_front_walk2.png");
+//        gingerbreadsprite4 = ResourceTools.loadImageFromResource("gingerland/gingerbread_right_still.png");
+//        gingerbreadsprite5 = ResourceTools.loadImageFromResource("gingerland/gingerbread_right_walk.png");
+//        gingerbreadsprite6 = ResourceTools.loadImageFromResource("gingerland/gingerbread_right_walk2.png");
+//        gingerbreadsprite7 = ResourceTools.loadImageFromResource("gingerland/gingerbread_left_still.png");
+//        gingerbreadsprite8 = ResourceTools.loadImageFromResource("gingerland/gingerbread_left_walk1.png");
+//        gingerbreadsprite9 = ResourceTools.loadImageFromResource("gingerland/gingerbread_left_walk2.png");
+//        lord_farquaad_left = ResourceTools.loadImageFromResource("gingerland/lord_farquaad_left.png");
+//        lord_farquaad_right = ResourceTools.loadImageFromResource("gingerland/lord_farquaad_right.png");
         gingerbreadhouse = ResourceTools.loadImageFromResource("gingerland/gingerbreadhouse.png");
 
     }
 
     SoundManager soundmanager;
     public static final String SOUND_BACKGROUND = "SOUND_BACKGROUND";
+    public static final String SOUND_COLLECTION = "SOUND_COLLECTION";
 
     private void setUpSound() {
         //set up a list of tracks in a playlist 
         ArrayList<Track> tracks = new ArrayList<>();
         tracks.add(new Track(SOUND_BACKGROUND, Source.RESOURCE, "/gingerland/background_music.wav"));
+        tracks.add(new Track(SOUND_COLLECTION, Source.RESOURCE, "/gingerland/collections_sound.wav"));
 
         Playlist playlist = new Playlist(tracks);
         //pass the playlist to a sound manager
@@ -188,24 +191,61 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
             } else {
                 counter = 0;
                 gingy.move();
-                score++;
+                
+                if (Math.random() < .33) {
+                    moveFarquaad();
+                }
+
+                checkIntersections();
             }
+        }
+    }
+
+    private void moveFarquaad() {
+        if ((farquaad != null) && (gingy != null)) {
+            if (farquaad.getX() > gingy.getX()) {
+                farquaad.move(-1, 0);
+                farquaad.setDirection(Direction.LEFT);
+            } else if (farquaad.getX() < gingy.getX()) {
+                farquaad.move(1, 0);
+                farquaad.setDirection(Direction.RIGHT);
+            }
+            
+        if (farquaad.getY() > gingy.getY()) { 
+            farquaad.move(0, -1);
+        } else if (farquaad.getY() < gingy.getY()) { 
+            farquaad.move(0, 1); 
+            
+        }
+
+            
+
         }
     }
 
     private void checkIntersections() {
         if (items != null) {
             for (Item item : items) {
-                item.setX(getRandom(grid.getColumns()));
-                item.setY(getRandom(grid.getColumns()));
+                if (item.getLocation().equals(gingy.getLocation())) {
+                    item.setX(getRandom(grid.getColumns()));
+                    item.setY(getRandom(grid.getRows()));
 
-                if (item.getType().equals(Item.ITEM_TYPE_CANDYCANE)) {
-                    score += 5;
+                    if (item.getType().equals(Item.ITEM_TYPE_CANDYCANE)) {
+                        score += 5;
+                    }
+                    if (item.getType().equals(Item.ITEM_TYPE_GUMMYBEAR)) {
+                        score += 10;
+                    }
+                    
+//                    soundmanager.play(SOUND_COLLECTION);
+                 //  if farquaads is the same as gingys location lose points 
+                    
+                   if (item.getLocation().equals(gingy.getLocation())) {
+                       
+                       
+                   }
+                   
                 }
-                if (item.getType().equals(Item.ITEM_TYPE_GUMMYBEAR)) {
-                    score += 10;
-                }
-
             }
         }
     }
@@ -287,18 +327,21 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
             gingy.draw(graphics);
         }
 
-        if (lord_farquaad_left != null) {
-            graphics.drawImage(lord_farquaad_left, 7, 7, this);
+        if (farquaad != null) {
+            farquaad.draw(graphics);
+
         }
 
-        if (lord_farquaad_right != null) {
-            graphics.drawImage(lord_farquaad_right, 10, 25, 20, 20, this);
-        }
-
-        if (gingerbreadhouse != null) {
-            graphics.drawImage(gingerbreadhouse, 900, 95, 150, 150, this);
-        }
-
+//        if (lord_farquaad_left != null) {
+//            graphics.drawImage(lord_farquaad_left, 7, 7, this);
+//        }
+//
+//        if (lord_farquaad_right != null) {
+//            graphics.drawImage(lord_farquaad_right, 10, 25, 20, 20, this);
+//        }
+//        if (gingerbreadhouse != null) {
+//            graphics.drawImage(gingerbreadhouse, 900, 95, 150, 150, this);
+//        }
         graphics.setColor(Color.WHITE);
         graphics.setFont(new Font("Calibri", Font.BOLD, 35));
         graphics.drawString("Score: " + score, 10, 20);
@@ -342,7 +385,12 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
             proposedLocation.y = 0;
         }
         return proposedLocation;
+
+//        if (lord_farquaad_left.) {
+//            
+//        }
     }
+
 }
 
 //    
