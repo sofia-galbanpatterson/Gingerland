@@ -253,7 +253,6 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
                     }
 //                    soundmanager.play(SOUND_COLLECTION);
                     //  if farquaads is the same as gingys location lose points
-                    
 
                     {
 
@@ -295,10 +294,7 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
             soundmanager.play(SOUND_BACKGROUND, 1);
         }
 
-    
     }
-    
-    
 
     @Override
     public void keyReleasedHandler(KeyEvent e) {
