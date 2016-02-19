@@ -182,7 +182,7 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
     private void setUpSound() {
         //set up a list of tracks in a playlist 
         ArrayList<Track> tracks = new ArrayList<>();
-        tracks.add(new Track(SOUND_BACKGROUND, Source.RESOURCE, "/gingerland/allstar.wav"));
+        tracks.add(new Track(SOUND_BACKGROUND, Source.RESOURCE, "/gingerland/farquaadsong.wav"));
         tracks.add(new Track(SOUND_COLLECTION, Source.RESOURCE, "/gingerland/collections_sound.wav"));
         tracks.add(new Track(SOUND_CRUNCH, Source.RESOURCE, "/gingerland/cookiecrunch.wav"));
 
