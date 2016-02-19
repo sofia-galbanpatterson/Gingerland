@@ -54,7 +54,7 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
 
     {
         //<editor-fold defaultstate="collapsed" desc="Barriers and Grid">
-        grid = new Grid(25, 15, 40, 40, new Point(10, 50), new Color(2, 49, 178, 255));
+        grid = new Grid(25, 15, 40, 40, new Point(10, 50), new Color(2, 49, 178, 1));
 
         BufferedImage temp = (BufferedImage) ResourceTools.loadImageFromResource("gingerland/grass_background.png");
 
@@ -162,8 +162,7 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
     SoundManager soundmanager;
     public static final String SOUND_BACKGROUND = "SOUND_BACKGROUND";
     public static final String SOUND_COLLECTION = "SOUND_COLLECTION";
-    public static final String SOUND_CRUNCH = "SOUND_CRUNCH"; 
-    
+    public static final String SOUND_CRUNCH = "SOUND_CRUNCH";
 
     private void setUpSound() {
         //set up a list of tracks in a playlist 
@@ -241,25 +240,23 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
                     if (item.getType().equals(Item.ITEM_TYPE_CANDYCANE)) {
                         AudioPlayer.play("/gingerland/collections_sound.wav");
 
-                        addScore(15);
+                        score += 15;
                     }
                     if (item.getType().equals(Item.ITEM_TYPE_GUMMYBEAR)) {
                         AudioPlayer.play("/gingerland/collections_sound.wav");
-                        addScore(20);
+                        score += 20;
                     }
                     if (item.getType().equals(Item.ITEM_TYPE_MILK)) {
                         AudioPlayer.play("/gingerland/cookiecrunch.wav");
-                        
-                        addScore(-100);
+
+                        score += -100;
                     }
-                    soundmanager.play(SOUND_COLLECTION);
-                    //  if farquaads is the same as gingys location lose points 
+//                    soundmanager.play(SOUND_COLLECTION);
+                    //  if farquaads is the same as gingys location lose points
                     
 
-                    
+                    {
 
-                 {
-                        
                     }
                 }
             }
@@ -298,7 +295,10 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
             soundmanager.play(SOUND_BACKGROUND, 1);
         }
 
+    
     }
+    
+    
 
     @Override
     public void keyReleasedHandler(KeyEvent e) {
@@ -415,11 +415,6 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
     }
 
     private void setScore(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void addScore(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
