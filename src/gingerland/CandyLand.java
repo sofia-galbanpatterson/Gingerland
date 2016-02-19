@@ -140,17 +140,17 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
     private int getRandom(int maximum) {
         return (int) (Math.random() * (maximum + 1));
     }
-    
-    public void setScore(int score) { 
-        this.score = score; 
-        
+
+    public void setScore(int score) {
+        this.score = score;
+
         //audio play 
     }
-    
-    public void addScore(int score) { 
-        setScore(this.score + score); 
-        if (score >= 0); 
-    
+
+    public void addScore(int score) {
+        setScore(this.score + score);
+        if (score >= 0);
+
     }
 
     public CandyLand() {
@@ -170,7 +170,6 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
 //        lord_farquaad_right = ResourceTools.loadImageFromResource("gingerland/lord_farquaad_right.png");
         gingerbreadhouse = ResourceTools.loadImageFromResource("gingerland/gingerbreadhouse.png");
 
-        
         setUpSound();
         soundmanager.play(SOUND_BACKGROUND, -1);
     }
@@ -186,7 +185,6 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
         tracks.add(new Track(SOUND_BACKGROUND, Source.RESOURCE, "/gingerland/allstar.wav"));
         tracks.add(new Track(SOUND_COLLECTION, Source.RESOURCE, "/gingerland/collections_sound.wav"));
         tracks.add(new Track(SOUND_CRUNCH, Source.RESOURCE, "/gingerland/cookiecrunch.wav"));
-        
 
         Playlist playlist = new Playlist(tracks);
         //pass the playlist to a sound manager
@@ -208,18 +206,20 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
     //need a counter and a limit
     @Override
     public void timerTaskHandler() {
-        if (gingy != null) {
-            if (counter < limit) {
-                counter++;
-            } else {
-                counter = 0;
-                gingy.move();
+        if (score >= 0) {
+            if (gingy != null) {
+                if (counter < limit) {
+                    counter++;
+                } else {
+                    counter = 0;
+                    gingy.move();
 
-                if (Math.random() < .33) {
-                    moveFarquaad();
+                    if (Math.random() < .33) {
+                        moveFarquaad();
+                    }
+
+                    checkIntersections();
                 }
-
-                checkIntersections();
             }
         }
     }
@@ -254,32 +254,30 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
                     if (item.getType().equals(Item.ITEM_TYPE_CANDYCANE)) {
                         AudioPlayer.play("/gingerland/collections_sound.wav");
 
-                        addScore (15);
+                        addScore(15);
                     }
                     if (item.getType().equals(Item.ITEM_TYPE_GUMMYBEAR)) {
                         AudioPlayer.play("/gingerland/collections_sound.wav");
-                        addScore (20);
+                        addScore(20);
                     }
                     if (item.getType().equals(Item.ITEM_TYPE_MILK)) {
                         AudioPlayer.play("/gingerland/cookiecrunch.wav");
 
-                       addScore (-100);
+                        addScore(-100);
                     }
 //                    soundmanager.play(SOUND_COLLECTION);
-                    //  if farquaads is the same as gingys location lose points
-                    
-                    if (item.getType().equals(Item.ITEM_TYPE_FARQUAAD)) {
-                        
-                        addScore (-10000);  
-                        
-                    }
 
-                    {
-
-                    }
                 }
             }
         }
+
+        if ((gingy != null) && (farquaad != null)) {
+            if (gingy.getLocation().equals(farquaad.getLocation())) {
+                System.out.println("Kill gingy");
+                this.score = -1;
+            }
+        }
+
     }
 
     @Override
@@ -307,12 +305,11 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
             AudioPlayer.play("/gingerland/collections_sound.wav");
         } else if (e.getKeyCode() == KeyEvent.VK_F) {
             AudioPlayer.play("/gingerland/jumpsound.wav");
-            
+
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             setScore(0);
-        
-        } 
-        else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+        } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             soundmanager.play(SOUND_BACKGROUND, 1);
         }
 
@@ -431,8 +428,6 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
 //            
 //        }
     }
-
-    
 
 }
 

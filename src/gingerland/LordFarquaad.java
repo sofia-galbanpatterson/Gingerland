@@ -10,6 +10,7 @@ import images.Animator;
 import images.ResourceTools;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
 
 /**
  *
@@ -61,6 +62,13 @@ public class LordFarquaad {
     /**
      * @return the x
      */
+    public Point getLocation() {
+        return new Point(x, y);
+    }
+    /**
+     * @return the x
+     */
+
     public int getX() {
         return x;
     }
