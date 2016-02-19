@@ -252,12 +252,12 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
                     item.setY(getRandom(grid.getRows()));
 
                     if (item.getType().equals(Item.ITEM_TYPE_CANDYCANE)) {
-                        AudioPlayer.play("/gingerland/collections_sound.wav");
+                        AudioPlayer.play("/gingerland/coincollection.wav");
 
                         addScore(15);
                     }
                     if (item.getType().equals(Item.ITEM_TYPE_GUMMYBEAR)) {
-                        AudioPlayer.play("/gingerland/collections_sound.wav");
+                        AudioPlayer.play("/gingerland/coincollection.wav");
                         addScore(20);
                     }
                     if (item.getType().equals(Item.ITEM_TYPE_MILK)) {
@@ -273,11 +273,13 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
 
         if ((gingy != null) && (farquaad != null)) {
             if (gingy.getLocation().equals(farquaad.getLocation())) {
-                System.out.println("Kill gingy");
+                AudioPlayer.play("/gingerland/farquaadlaugh.wav");
+//                System.out.println("Kill gingy");
                 this.score = -1;
             }
         }
 
+        
     }
 
     @Override
@@ -303,6 +305,7 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
 
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             this.score = 0; 
+            
         } else if (e.getKeyCode() == KeyEvent.VK_F) {
             AudioPlayer.play("/gingerland/jumpsound.wav");
 
