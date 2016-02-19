@@ -302,7 +302,7 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
             this.limit = LIMIT_CRAZY;
 
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            AudioPlayer.play("/gingerland/collections_sound.wav");
+            this.score = 0; 
         } else if (e.getKeyCode() == KeyEvent.VK_F) {
             AudioPlayer.play("/gingerland/jumpsound.wav");
 
