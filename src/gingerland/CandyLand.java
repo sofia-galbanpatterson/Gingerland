@@ -129,10 +129,10 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
         items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getRows()), Item.ITEM_TYPE_CANDYCANE,
                 ResourceTools.loadImageFromResource("gingerland/candycane.png"), this));
     }
-
     private int getRandom(int maximum) {
         return (int) (Math.random() * (maximum + 1));
     }
+    
 
     public CandyLand() {
         gingy = new GingerbreadMan(3, 4, Direction.DOWN, this, this);
@@ -160,14 +160,18 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
     private void setUpSound() {
         //set up a list of tracks in a playlist 
         ArrayList<Track> tracks = new ArrayList<>();
-        tracks.add(new Track(SOUND_BACKGROUND, Source.RESOURCE, "/gingerland/background_music.wav"));
+        tracks.add(new Track(SOUND_BACKGROUND, Source.RESOURCE, "/gingerland/allstar.wav"));
         tracks.add(new Track(SOUND_COLLECTION, Source.RESOURCE, "/gingerland/collections_sound.wav"));
 
         Playlist playlist = new Playlist(tracks);
         //pass the playlist to a sound manager
         soundmanager = new SoundManager(playlist);
+        
+   
+                
 
         setUpSound();
+        soundmanager.play(SOUND_BACKGROUND, -1);
     }
 
     @Override
@@ -275,6 +279,9 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
             AudioPlayer.play("/gingerland/collections_sound.wav");
         } else if (e.getKeyCode() == KeyEvent.VK_F) {
             AudioPlayer.play("/gingerland/jumpsound.wav");
+        } else if (e.getKeyCode() == KeyEvent.VK_SPACE) { 
+            setScore(0); 
+        
 
         } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             soundmanager.play(SOUND_BACKGROUND);
@@ -345,6 +352,11 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
         graphics.setColor(Color.WHITE);
         graphics.setFont(new Font("Calibri", Font.BOLD, 35));
         graphics.drawString("Score: " + score, 10, 20);
+        
+        if (score < 0) { 
+            graphics.drawString("Game Over", 300, 300);
+            graphics.drawString("Press Space to restart!", 300, 350);
+        }
 
     }
 
@@ -389,6 +401,10 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
 //        if (lord_farquaad_left.) {
 //            
 //        }
+    }
+
+    private void setScore(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
