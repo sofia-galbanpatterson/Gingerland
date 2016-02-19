@@ -37,6 +37,8 @@ public class Item {
             image = ResourceTools.loadImageFromResource("gingerland/candycane.png");
         } else if (type.equals(Item.ITEM_TYPE_GUMMYBEAR)) {
             image = ResourceTools.loadImageFromResource("gingerland/gummybear.png");
+        } else if (type.equals(Item.ITEM_TYPE_MILK)) { 
+            image = ResourceTools.loadImageFromResource("gingerland/milk.png");  
         }
     }
 
@@ -53,6 +55,7 @@ public class Item {
      */
     public static final String ITEM_TYPE_CANDYCANE = "CANDYCANE";
     public static final String ITEM_TYPE_GUMMYBEAR = "GUMMYBEAR";
+    public static final String ITEM_TYPE_MILK = "MILK"; 
 
     public Point getLocation() {
         return new Point(x, y);

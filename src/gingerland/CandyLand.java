@@ -128,11 +128,17 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
                 ResourceTools.loadImageFromResource("gingerland/candycane.png"), this));
         items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getRows()), Item.ITEM_TYPE_CANDYCANE,
                 ResourceTools.loadImageFromResource("gingerland/candycane.png"), this));
+        items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getRows()), Item.ITEM_TYPE_MILK,
+                ResourceTools.loadImageFromResource("gingerland/milk.png"), this));
+        items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getRows()), Item.ITEM_TYPE_MILK,
+                ResourceTools.loadImageFromResource("gingerland/milk.png"), this));
+        items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getRows()), Item.ITEM_TYPE_MILK,
+                ResourceTools.loadImageFromResource("gingerland/milk.png"), this));
     }
+
     private int getRandom(int maximum) {
         return (int) (Math.random() * (maximum + 1));
     }
-    
 
     public CandyLand() {
         gingy = new GingerbreadMan(3, 4, Direction.DOWN, this, this);
@@ -156,19 +162,19 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
     SoundManager soundmanager;
     public static final String SOUND_BACKGROUND = "SOUND_BACKGROUND";
     public static final String SOUND_COLLECTION = "SOUND_COLLECTION";
+    public static final String SOUND_CRUNCH = "SOUND_CRUNCH"; 
+    
 
     private void setUpSound() {
         //set up a list of tracks in a playlist 
         ArrayList<Track> tracks = new ArrayList<>();
         tracks.add(new Track(SOUND_BACKGROUND, Source.RESOURCE, "/gingerland/allstar.wav"));
         tracks.add(new Track(SOUND_COLLECTION, Source.RESOURCE, "/gingerland/collections_sound.wav"));
+        tracks.add(new Track(SOUND_CRUNCH, Source.RESOURCE, "/gingerland/cookiecrunch.wav"));
 
         Playlist playlist = new Playlist(tracks);
         //pass the playlist to a sound manager
         soundmanager = new SoundManager(playlist);
-        
-   
-                
 
         setUpSound();
         soundmanager.play(SOUND_BACKGROUND, -1);
@@ -195,7 +201,7 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
             } else {
                 counter = 0;
                 gingy.move();
-                
+
                 if (Math.random() < .33) {
                     moveFarquaad();
                 }
@@ -214,15 +220,13 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
                 farquaad.move(1, 0);
                 farquaad.setDirection(Direction.RIGHT);
             }
-            
-        if (farquaad.getY() > gingy.getY()) { 
-            farquaad.move(0, -1);
-        } else if (farquaad.getY() < gingy.getY()) { 
-            farquaad.move(0, 1); 
-            
-        }
 
-            
+            if (farquaad.getY() > gingy.getY()) {
+                farquaad.move(0, -1);
+            } else if (farquaad.getY() < gingy.getY()) {
+                farquaad.move(0, 1);
+
+            }
 
         }
     }
@@ -235,20 +239,28 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
                     item.setY(getRandom(grid.getRows()));
 
                     if (item.getType().equals(Item.ITEM_TYPE_CANDYCANE)) {
-                        score += 5;
+                        AudioPlayer.play("/gingerland/collections_sound.wav");
+
+                        addScore(15);
                     }
                     if (item.getType().equals(Item.ITEM_TYPE_GUMMYBEAR)) {
-                        score += 10;
+                        AudioPlayer.play("/gingerland/collections_sound.wav");
+                        addScore(20);
                     }
+                    if (item.getType().equals(Item.ITEM_TYPE_MILK)) {
+                        AudioPlayer.play("/gingerland/cookiecrunch.wav");
+                        
+                        addScore(-100);
+                    }
+                    soundmanager.play(SOUND_COLLECTION);
+                    //  if farquaads is the same as gingys location lose points 
                     
-//                    soundmanager.play(SOUND_COLLECTION);
-                 //  if farquaads is the same as gingys location lose points 
+
                     
-                   if (item.getLocation().equals(gingy.getLocation())) {
-                       
-                       
-                   }
-                   
+
+                 {
+                        
+                    }
                 }
             }
         }
@@ -279,12 +291,11 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
             AudioPlayer.play("/gingerland/collections_sound.wav");
         } else if (e.getKeyCode() == KeyEvent.VK_F) {
             AudioPlayer.play("/gingerland/jumpsound.wav");
-        } else if (e.getKeyCode() == KeyEvent.VK_SPACE) { 
-            setScore(0); 
-        
+        } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            setScore(0);
 
         } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-            soundmanager.play(SOUND_BACKGROUND);
+            soundmanager.play(SOUND_BACKGROUND, 1);
         }
 
     }
@@ -352,8 +363,8 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
         graphics.setColor(Color.WHITE);
         graphics.setFont(new Font("Calibri", Font.BOLD, 35));
         graphics.drawString("Score: " + score, 10, 20);
-        
-        if (score < 0) { 
+
+        if (score < 0) {
             graphics.drawString("Game Over", 300, 300);
             graphics.drawString("Press Space to restart!", 300, 350);
         }
@@ -404,6 +415,10 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
     }
 
     private void setScore(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void addScore(int i) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
