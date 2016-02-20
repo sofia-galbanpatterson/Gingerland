@@ -274,10 +274,7 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
                         AudioPlayer.play("/gingerland/coincollection.wav");
 
                         addScore(15);
-                    }
-                    if (item.getType().equals(Item.ITEM_TYPE_GUMMYBEAR)) {
-                        AudioPlayer.play("/gingerland/coincollection.wav");
-                        addScore(20);
+                   
                     }
                     if (item.getType().equals(Item.ITEM_TYPE_MILK)) {
                         AudioPlayer.play("/gingerland/cookiecrunch.wav");
