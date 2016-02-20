@@ -39,8 +39,14 @@ public class Item {
             image = ResourceTools.loadImageFromResource("gingerland/gummybear.png");
         } else if (type.equals(Item.ITEM_TYPE_MILK)) {
             image = ResourceTools.loadImageFromResource("gingerland/milk.png");
-        } 
+        } else if (type.equals(Item.ITEM_TYPE_CUPCAKE)) {
+            image = ResourceTools.loadImageFromResource("gingerland/cupcake.png");
+        } else if (type.equals(Item.ITEM_TYPE_HARDCANDY)) {
+            image = ResourceTools.loadImageFromResource("gingerland/hardcandy.gif");
+        } else if (type.equals(Item.ITEM_TYPE_CHOCOLATEBAR)) {
+            image = ResourceTools.loadImageFromResource("gingerland/chocolatebar.png");
     }
+    } 
 
     //<editor-fold defaultstate="collapsed" desc="Properties">
     private int x, y;
@@ -57,6 +63,9 @@ public class Item {
     public static final String ITEM_TYPE_GUMMYBEAR = "GUMMYBEAR";
     public static final String ITEM_TYPE_MILK = "MILK";
     public static final String ITEM_TYPE_FARQUAAD = "FARQUAAD";
+    public static final String ITEM_TYPE_CUPCAKE = "CUPCAKE";
+    public static final String ITEM_TYPE_HARDCANDY = "HARDCANDY";
+    public static final String ITEM_TYPE_CHOCOLATEBAR = "CHOCOLATEBAR";
 
     public Point getLocation() {
         return new Point(x, y);
