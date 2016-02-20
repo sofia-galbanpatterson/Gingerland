@@ -107,7 +107,7 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
 //        //</editor-fold>
 
         items = new ArrayList<>();
-      items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getRows()), Item.ITEM_TYPE_MILK,
+        items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getRows()), Item.ITEM_TYPE_MILK,
                 ResourceTools.loadImageFromResource("gingerland/milk.png"), this));
         items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getRows()), Item.ITEM_TYPE_CANDYCANE,
                 ResourceTools.loadImageFromResource("gingerland/candycane.png"), this));
@@ -146,12 +146,14 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
         items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getRows()), Item.ITEM_TYPE_HARDCANDY,
                 ResourceTools.loadImageFromResource("gingerland/hardcandy.gif"), this));
         items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getRows()), Item.ITEM_TYPE_HARDCANDY,
-                ResourceTools.loadImageFromResource("gingerland/hardcandy.gif"), this)); 
-        
-        
-        
-       
-        
+                ResourceTools.loadImageFromResource("gingerland/hardcandy.gif"), this));
+        items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getRows()), Item.ITEM_TYPE_CUPCAKE,
+                ResourceTools.loadImageFromResource("gingerland/cupcake.png"), this));
+        items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getRows()), Item.ITEM_TYPE_CUPCAKE,
+                ResourceTools.loadImageFromResource("gingerland/cupcake.png"), this));
+        items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getRows()), Item.ITEM_TYPE_CUPCAKE,
+                ResourceTools.loadImageFromResource("gingerland/cupcake.png"), this));
+
     }
 
     private int getRandom(int maximum) {
@@ -160,7 +162,6 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
 
     public void setScore(int score) {
         this.score = score;
-        
 
         //audio play 
     }
@@ -196,7 +197,6 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
     public static final String SOUND_BACKGROUND = "SOUND_BACKGROUND";
     public static final String SOUND_COLLECTION = "SOUND_COLLECTION";
     public static final String SOUND_CRUNCH = "SOUND_CRUNCH";
-    
 
     private void setUpSound() {
         //set up a list of tracks in a playlist 
@@ -274,37 +274,35 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
                         AudioPlayer.play("/gingerland/coincollection.wav");
 
                         addScore(15);
-                   
+
                     }
                     if (item.getType().equals(Item.ITEM_TYPE_MILK)) {
                         AudioPlayer.play("/gingerland/cookiecrunch.wav");
 
                         addScore(-100);
                     }
-                    
+
                     if (item.getType().equals(Item.ITEM_TYPE_CUPCAKE)) {
                         AudioPlayer.play("/gingerland/coincollection.wav");
 
                         addScore(150);
-                        
-                    } 
-                    
-                    if (item.getType().equals(Item.ITEM_TYPE_CHOCOLATEBAR)) { 
-                        AudioPlayer.play("/gingerland/coincollection.wav");
-                        
-                        addScore(500); 
-                    }
-                    
-                     if (item.getType().equals(Item.ITEM_TYPE_HARDCANDY)) { 
-                        AudioPlayer.play("/gingerland/coincollection.wav");
-                        
-                        addScore(1000); 
-                        
-                     } 
-                    
-                    
-//                    soundmanager.play(SOUND_COLLECTION);
 
+                    }
+
+                    if (item.getType().equals(Item.ITEM_TYPE_CHOCOLATEBAR)) {
+                        AudioPlayer.play("/gingerland/coincollection.wav");
+
+                        addScore(500);
+                    }
+
+                    if (item.getType().equals(Item.ITEM_TYPE_HARDCANDY)) {
+                        AudioPlayer.play("/gingerland/coincollection.wav");
+
+                        addScore(1000);
+
+                    }
+
+//                    soundmanager.play(SOUND_COLLECTION);
                 }
             }
         }
@@ -317,7 +315,6 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
             }
         }
 
-        
     }
 
     @Override
@@ -342,8 +339,8 @@ class CandyLand extends Environment implements CellDataProviderIntf, MoveValidat
             this.limit = LIMIT_CRAZY;
 
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            this.score = 0; 
-            
+            this.score = 0;
+
         } else if (e.getKeyCode() == KeyEvent.VK_F) {
             AudioPlayer.play("/gingerland/jumpsound.wav");
 
